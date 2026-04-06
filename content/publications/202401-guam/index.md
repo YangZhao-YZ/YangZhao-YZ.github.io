@@ -27,10 +27,12 @@ publication_short: ""
 abstract: Perception, Planning, and Control form the essential components of autonomy in advanced air mobility. This work advances the holistic integration of these components to enhance the performance and robustness of the complete cyber-physical system. We adapt Perception Simplex, a system for verifiable collision avoidance amidst obstacle detection faults, to the vertical landing maneuver for autonomous air mobility vehicles. We improve upon this system by replacing static assumptions of control capabilities with dynamic confirmation, i.e., real-time confirmation of control limitations of the system, ensuring reliable fulfillment of safety maneuvers and overrides, without dependence on overly pessimistic assumptions. Parameters defining control system capabilities and limitations, e.g., maximum deceleration, are continuously tracked within the system and used to make safety-critical decisions. We apply these techniques to propose a verifiable collision avoidance solution for autonomous aerial mobility vehicles operating in cluttered and potentially unsafe environments.
 
 # Summary. An optional shortened abstract.
-summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
+summary: 
 
 tags:
-- Source Themes
+  - Cyber-physical System
+  - Robust Control
+  - Adaptive Control
 featured: true
 
 hugoblox:
