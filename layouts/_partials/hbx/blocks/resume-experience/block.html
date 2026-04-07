@@ -165,14 +165,14 @@
     <div class="space-y-8">
       {{ range $idx, $item := $experience }}
       {{/* Card wrapper */}}
-      <div class="group relative pl-12 sm:pl-16">
+      <div class="relative pl-12 sm:pl-16">
 
         {{/* Timeline marker */}}
         <div class="absolute left-0 sm:left-2 top-6 flex items-center justify-center">
           {{/* Glowing dot */}}
           <div class="relative">
-            <div class="absolute inset-0 w-8 h-8 bg-primary-500/30 rounded-full blur-md group-hover:bg-primary-500/50 transition-all duration-300"></div>
-            <div class="relative w-8 h-8 bg-white dark:bg-gray-900 border-2 border-primary-500 rounded-full flex items-center justify-center group-hover:border-primary-400 group-hover:scale-110 transition-all duration-300">
+            <div class="absolute inset-0 w-8 h-8 bg-primary-500/30 rounded-full blur-md"></div>
+            <div class="relative w-8 h-8 bg-white dark:bg-gray-900 border-2 border-primary-500 rounded-full flex items-center justify-center">
               {{ $icon := index $item "icon" }}
               {{ if $icon }}
                 {{ partial "functions/get_icon" (dict "name" $icon "attributes" "class='w-4 h-4 text-primary-600 dark:text-primary-400'") }}
@@ -184,13 +184,13 @@
         </div>
 
         {{/* Content card */}}
-        <div class="relative bg-white dark:bg-white/[0.02] backdrop-blur-sm rounded-xl border border-gray-200 dark:border-white/[0.06] p-6 hover:bg-gray-50 dark:hover:bg-white/[0.04] hover:border-primary-300 dark:hover:border-primary-500/30 transition-all duration-300 group-hover:translate-x-1 shadow-sm dark:shadow-none">
+        <div class="relative bg-white dark:bg-white/[0.02] backdrop-blur-sm rounded-xl border border-gray-200 dark:border-white/[0.06] p-6 shadow-sm dark:shadow-none">
 
           {{/* Header row */}}
           <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
             <div>
               {{/* Role/Position */}}
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">
                 {{ index $item "role" }}
               </h3>
               {{/* Company */}}
@@ -289,14 +289,14 @@
     <div class="space-y-8">
       {{ range $idx, $item := $education }}
       {{/* Card wrapper */}}
-      <div class="group relative pl-12 sm:pl-16">
+      <div class="relative pl-12 sm:pl-16">
 
         {{/* Timeline marker */}}
         <div class="absolute left-0 sm:left-2 top-6 flex items-center justify-center">
           {{/* Glowing dot */}}
           <div class="relative">
-            <div class="absolute inset-0 w-8 h-8 bg-secondary-500/30 rounded-full blur-md group-hover:bg-secondary-500/50 transition-all duration-300"></div>
-            <div class="relative w-8 h-8 bg-white dark:bg-gray-900 border-2 border-secondary-500 rounded-full flex items-center justify-center group-hover:border-secondary-400 group-hover:scale-110 transition-all duration-300">
+            <div class="absolute inset-0 w-8 h-8 bg-secondary-500/30 rounded-full blur-md"></div>
+            <div class="relative w-8 h-8 bg-white dark:bg-gray-900 border-2 border-secondary-500 rounded-full flex items-center justify-center">
               {{ $icon := index $item "icon" }}
               {{ if $icon }}
                 {{ partial "functions/get_icon" (dict "name" $icon "attributes" "class='w-4 h-4 text-secondary-600 dark:text-secondary-400'") }}
@@ -308,13 +308,13 @@
         </div>
 
         {{/* Content card */}}
-        <div class="relative bg-white dark:bg-white/[0.02] backdrop-blur-sm rounded-xl border border-gray-200 dark:border-white/[0.06] p-6 hover:bg-gray-50 dark:hover:bg-white/[0.04] hover:border-secondary-300 dark:hover:border-secondary-500/30 transition-all duration-300 group-hover:translate-x-1 shadow-sm dark:shadow-none">
+        <div class="relative bg-white dark:bg-white/[0.02] backdrop-blur-sm rounded-xl border border-gray-200 dark:border-white/[0.06] p-6 shadow-sm dark:shadow-none">
 
           {{/* Header row */}}
           <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
             <div>
               {{/* Degree */}}
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-secondary-600 dark:group-hover:text-secondary-400 transition-colors">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white">
                 {{ index $item "degree" }}
               </h3>
               {{/* Institution */}}
