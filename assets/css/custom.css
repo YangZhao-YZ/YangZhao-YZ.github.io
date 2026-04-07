@@ -30,6 +30,48 @@
   pointer-events: none;
 }
 
+#section-resume-experience ~ section.hbb-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(52rem, calc(100% - 4rem));
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-primary-300) 18%,
+    var(--color-primary-500) 50%,
+    var(--color-secondary-300) 82%,
+    transparent 100%
+  );
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.resume-block-divider {
+  display: flex;
+  justify-content: center;
+  margin-block: 2rem;
+  pointer-events: none;
+}
+
+.resume-block-divider::before {
+  content: "";
+  width: min(52rem, calc(100% - 4rem));
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-primary-300) 18%,
+    var(--color-primary-500) 50%,
+    var(--color-secondary-300) 82%,
+    transparent 100%
+  );
+  opacity: 0.45;
+}
+
 .homepage-news-list {
   display: flex;
   flex-direction: column;
