@@ -26,6 +26,8 @@
 {{ $profile := partial "functions/get_author_profile" $username }}
 
 {{ $is_education_first := partial "functions/coerce_bool" (dict "value" (index $design "is_education_first") "default" false) }}
+{{ $show_experience := partial "functions/coerce_bool" (dict "value" (index $content "show_experience") "default" true) }}
+{{ $show_education := partial "functions/coerce_bool" (dict "value" (index $content "show_education") "default" true) }}
 {{ $date_format := "Jan 2006" }}
 {{ $date_format_raw := index $design "date_format" }}
 {{ if eq (printf "%T" $date_format_raw) "string" }}
@@ -150,7 +152,7 @@
 
 <div class="flex flex-col gap-16 {{ if $is_education_first }}flex-col-reverse{{end}}">
 
-{{ if gt (len $experience) 0 }}
+{{ if and $show_experience (gt (len $experience) 0) }}
 <div class="w-full">
   <h2 class="mb-10 text-3xl font-bold text-gray-900 dark:text-white text-center">{{ i18n "experience" | default "Experience" }}</h2>
 
@@ -274,7 +276,7 @@
 </div>
 {{ end }}
 
-{{ if gt (len $education) 0 }}
+{{ if and $show_education (gt (len $education) 0) }}
 <div class="w-full">
   <h2 class="mb-10 text-3xl font-bold text-gray-900 dark:text-white text-center">{{ i18n "education" | default "Education" }}</h2>
 

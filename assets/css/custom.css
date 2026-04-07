@@ -6,6 +6,10 @@
   display: none;
 }
 
+#section-resume-biography-3 .resume-biography .md\:col-span-8 > .mb-16:has(> .grid.grid-cols-1.md\:grid-cols-2.xl\:grid-cols-3) {
+  display: none;
+}
+
 #section-resume-biography-3 ~ section.hbb-section::before {
   content: "";
   position: absolute;
