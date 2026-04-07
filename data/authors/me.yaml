@@ -46,6 +46,7 @@ education:
     institution: Northeastern University
     start: 2024-09
     end: 
+    icon: logo-neu.png
     # summary: |
     #   Thesis on scaling laws for neural language models. Published 5 papers in NeurIPS and ICML.
     # button:
@@ -56,10 +57,12 @@ education:
     institution: University of Illinois Urbana-Champaign
     start: 2022-08
     end: 2024-05
+    icon: logo-uiuc.png
   - degree: B.Eng. in Electronic and Information Engineering
     institution: Hong Kong Polytechnic University
     start: 2018-09
     end: 2022-05
+    icon: logo-polyu.png
 
 experience:
   - role: Senior AI Research Scientist

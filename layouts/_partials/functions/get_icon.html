@@ -1,0 +1,82 @@
+{{/* Return the requested icon as safeHTML for Go template rendering.
+     Extends Hugo Blox's default behavior with support for local image files
+     placed in assets/media, so fields like `icon: logo-neu.png` work. */}}
+
+{{ $dirFile := path.Split .name }}
+{{ $pack := .pack | default (strings.Replace $dirFile.Dir "/" "") | default "hero" }}
+{{ $name := $dirFile.File }}
+
+{{ $icon := "" }}
+{{ $rawName := printf "%v" .name }}
+{{ $lowerName := lower $rawName }}
+{{ $imageMatch := findRE "\\.(png|jpe?g|webp|gif|svg)$" $lowerName }}
+
+{{ if gt (len $imageMatch) 0 }}
+  {{ $resourcePath := $rawName }}
+  {{ if not (hasPrefix $resourcePath "media/") }}
+    {{ $resourcePath = path.Join "media" $resourcePath }}
+  {{ end }}
+  {{ $image := resources.Get $resourcePath }}
+  {{ if $image }}
+    {{ $attrs := .attributes | default "" }}
+    {{ if in $attrs "class=\"" }}
+      {{ $attrs = replaceRE "class=\"([^\"]*)\"" "class=\"$1 hb-image-icon object-contain\"" $attrs }}
+    {{ else if in $attrs "class='" }}
+      {{ $attrs = replaceRE "class='([^']*)'" "class='$1 hb-image-icon object-contain'" $attrs }}
+    {{ else if $attrs }}
+      {{ $attrs = printf "%s class=\"hb-image-icon object-contain\"" $attrs }}
+    {{ else }}
+      {{ $attrs = "class=\"hb-image-icon object-contain\"" }}
+    {{ end }}
+    {{ $icon = printf "<img src=\"%s\" alt=\"\" loading=\"lazy\" decoding=\"async\" %s>" $image.RelPermalink $attrs }}
+  {{ end }}
+{{ end }}
+
+{{- if not $icon -}}
+  {{- if eq $pack "emoji" -}}
+    {{/* Handle emoji pack: convert name to :name: format and emojify */}}
+    {{ $wrapped := cond (hasPrefix $name ":") $name (printf ":%s:" $name) }}
+    {{ $emoji := $wrapped | emojify }}
+    {{ $attrs := .attributes | default "" }}
+    {{ if in $attrs "w-24" }}{{ $attrs = replaceRE "w-24 h-24" "" $attrs }}{{ $attrs = printf "%s text-8xl leading-none" $attrs }}{{ end }}
+    {{ if in $attrs "w-16" }}{{ $attrs = replaceRE "w-16 h-16" "" $attrs }}{{ $attrs = printf "%s text-5xl leading-none" $attrs }}{{ end }}
+    {{ if in $attrs "w-12" }}{{ $attrs = replaceRE "w-12 h-12" "" $attrs }}{{ $attrs = printf "%s text-5xl leading-none" $attrs }}{{ end }}
+    {{ if in $attrs "w-8" }}{{ $attrs = replaceRE "w-8 h-8" "" $attrs }}{{ $attrs = printf "%s text-4xl leading-none" $attrs }}{{ end }}
+    {{ if in $attrs "w-6" }}{{ $attrs = replaceRE "w-6 h-6" "" $attrs }}{{ $attrs = printf "%s text-2xl leading-none" $attrs }}{{ end }}
+    {{ if in $attrs "w-5" }}{{ $attrs = replaceRE "w-5 h-5" "" $attrs }}{{ $attrs = printf "%s text-xl leading-none" $attrs }}{{ end }}
+    {{ if in $attrs "w-4" }}{{ $attrs = replaceRE "w-4 h-4" "" $attrs }}{{ $attrs = printf "%s text-lg leading-none" $attrs }}{{ end }}
+    {{ $style_attr := "" }}
+    {{ if in $attrs "text-8xl" }}{{ $style_attr = "style=\"font-size: 6rem !important; line-height: 1 !important;\"" }}{{ end }}
+    {{ if in $attrs "text-5xl" }}{{ $style_attr = "style=\"font-size: 3rem !important; line-height: 1 !important;\"" }}{{ end }}
+    {{ if in $attrs "text-4xl" }}{{ $style_attr = "style=\"font-size: 2.25rem !important; line-height: 1 !important;\"" }}{{ end }}
+    {{ if in $attrs "text-2xl" }}{{ $style_attr = "style=\"font-size: 1.5rem !important; line-height: 1 !important;\"" }}{{ end }}
+    {{ if in $attrs "text-xl" }}{{ $style_attr = "style=\"font-size: 1.25rem !important; line-height: 1 !important;\"" }}{{ end }}
+    {{ if in $attrs "text-lg" }}{{ $style_attr = "style=\"font-size: 1.125rem !important; line-height: 1 !important;\"" }}{{ end }}
+    {{ $attrs = printf "%s %s" $attrs $style_attr }}
+    {{ $icon = printf "<span %s>%s</span>" $attrs $emoji }}
+  {{- else -}}
+    {{/* Try to resolve as an SVG icon from packs / user assets */}}
+    {{ $icon = partial "functions/get_icon_svg" (dict "name" .name "pack" (.pack | default "") "Page" .Page) }}
+
+    {{- if not $icon -}}
+      {{ if not (strings.Contains $.name "/") }}
+        {{ $attrs := .attributes | default "" }}
+        {{ if in $attrs "w-24" }}{{ $attrs = replaceRE "w-24 h-24" "text-8xl" $attrs }}{{ end }}
+        {{ if in $attrs "w-16" }}{{ $attrs = replaceRE "w-16 h-16" "text-5xl" $attrs }}{{ end }}
+        {{ if in $attrs "w-12" }}{{ $attrs = replaceRE "w-12 h-12" "text-5xl" $attrs }}{{ end }}
+        {{ if in $attrs "w-8" }}{{ $attrs = replaceRE "w-8 h-8" "text-4xl" $attrs }}{{ end }}
+        {{ if in $attrs "w-6" }}{{ $attrs = replaceRE "w-6 h-6" "text-2xl" $attrs }}{{ end }}
+        {{ if in $attrs "w-5" }}{{ $attrs = replaceRE "w-5 h-5" "text-xl" $attrs }}{{ end }}
+        {{ if in $attrs "w-4" }}{{ $attrs = replaceRE "w-4 h-4" "text-lg" $attrs }}{{ end }}
+        {{ if not (in $attrs "flex") }}{{ $attrs = replaceRE "class=\"" "class=\"flex items-center justify-center leading-none " $attrs }}{{ end }}
+        {{ $icon = printf "<span %s>%s</span>" $attrs $.name }}
+      {{ end }}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{ if and .attributes $icon (hasPrefix $icon "<svg") }}
+  {{ $icon = replaceRE "<svg" (printf "<svg %s" .attributes) $icon }}
+{{ end }}
+
+{{- return ($icon | safeHTML) -}}
