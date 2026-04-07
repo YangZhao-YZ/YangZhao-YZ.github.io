@@ -1,0 +1,6 @@
+{{- $is_home_featured_pubs := and (reflect.IsMap .page) (eq (index .page "id") "featured-publications") -}}
+{{- if $is_home_featured_pubs -}}
+  {{- partial "views/featured-publication-horizontal.html" . -}}
+{{- else -}}
+  {{- partial "views/card.html" . -}}
+{{- end -}}

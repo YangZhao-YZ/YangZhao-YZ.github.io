@@ -50,6 +50,7 @@ sections:
     design:
       columns: '1'
   - block: collection
+    id: featured-publications
     content:
       title: Featured Publications
       filters:
@@ -58,7 +59,8 @@ sections:
         featured_only: true
     design:
       view: article-grid
-      columns: 2
+      columns: 1
+      fill_image: false
   # - block: collection
   #   id: talks
   #   content:
