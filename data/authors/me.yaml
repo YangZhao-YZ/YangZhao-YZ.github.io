@@ -108,8 +108,14 @@ experience:
 #     label: Fluent
 
 awards:
-  - title: Best Paper Award
-    awarder: NeurIPS
-    date: "2022-12-01"
-    summary: Awarded for groundbreaking work on efficient training of large models.
-    icon: hero/trophy
+  # - title: Best Paper Award
+  #   awarder: NeurIPS
+  #   date: "2022-12-01"
+  #   summary: Awarded for groundbreaking work on efficient training of large models.
+  #   icon: hero/trophy
+  - title: The Hong Kong Polytechnic University Scholarship 2021/22
+    year: 2021
+  - title: HKSAR Government Scholarship Fund - Talent Development Scholarship 2020/21
+    year: 2020
+  - title: Hong Kong Wanren Funding (2019 Globex Julmester @Peking University)
+    year: 2019

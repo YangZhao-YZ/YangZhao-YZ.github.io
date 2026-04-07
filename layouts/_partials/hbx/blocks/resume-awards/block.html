@@ -1,0 +1,169 @@
+{{/* Hugo Blox: Awards
+     Local override: render awards as a compact year-left / title-right list. */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $content := $block.content }}
+{{ if not (reflect.IsMap $content) }}{{ $content = dict }}{{ end }}
+{{ $design := $block.design }}
+{{ if not (reflect.IsMap $design) }}{{ $design = dict }}{{ end }}
+
+{{ $username := "me" }}
+{{ with index $content "username" }}
+  {{ $username = strings.TrimSpace (printf "%v" .) }}
+{{ end }}
+{{ $profile := partial "functions/get_author_profile" $username }}
+{{ $awards_raw := $profile.awards }}
+
+{{ $date_format := "January 2006" }}
+{{ with index $design "date_format" }}
+  {{ $date_format = strings.TrimSpace (printf "%v" .) | default "January 2006" }}
+{{ end }}
+
+{{ $awards_iter := slice }}
+{{ if reflect.IsSlice $awards_raw }}
+  {{ $awards_iter = $awards_raw }}
+{{ else if reflect.IsMap $awards_raw }}
+  {{ range $awards_raw }}
+    {{ $awards_iter = $awards_iter | append . }}
+  {{ end }}
+{{ end }}
+
+{{ $awards := slice }}
+{{ if gt (len $awards_iter) 0 }}
+  {{ range $awards_iter }}
+    {{ if reflect.IsMap . }}
+      {{ $title := "" }}
+      {{ $url := "" }}
+      {{ $awarder := "" }}
+      {{ $date := "" }}
+      {{ $date_start := "" }}
+      {{ $year := "" }}
+      {{ $summary := "" }}
+      {{ $certificate_url := "" }}
+
+      {{ with index . "title" }}{{ $title = strings.TrimSpace (printf "%v" .) }}{{ end }}
+      {{ with index . "url" }}{{ $url = strings.TrimSpace (printf "%v" .) }}{{ end }}
+      {{ with index . "awarder" }}{{ $awarder = strings.TrimSpace (printf "%v" .) }}{{ end }}
+      {{ with index . "date" }}{{ $date = strings.TrimSpace (printf "%v" .) }}{{ end }}
+      {{ with index . "date_start" }}{{ $date_start = strings.TrimSpace (printf "%v" .) }}{{ end }}
+      {{ with index . "year" }}{{ $year = strings.TrimSpace (printf "%v" .) }}{{ end }}
+      {{ with index . "summary" }}{{ $summary = strings.TrimSpace (printf "%v" .) }}{{ end }}
+      {{ with index . "certificate_url" }}{{ $certificate_url = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+      {{ if $title }}
+        {{ $date_sort := $date | default $date_start | default $year }}
+        {{ $year_display := $year }}
+        {{ if not $year_display }}
+          {{ $date_value := $date | default $date_start }}
+          {{ if $date_value }}
+            {{ $parsed := try (time $date_value) }}
+            {{ if not $parsed.Err }}
+              {{ $year_display = $parsed.Value | time.Format "2006" }}
+            {{ else }}
+              {{ $year_display = $date_value }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        {{ if not $year_display }}
+          {{ $year_display = i18n "present" | default "Present" }}
+        {{ end }}
+        {{ $awards = $awards | append (dict
+          "title" $title
+          "url" $url
+          "awarder" $awarder
+          "date" $date
+          "date_start" $date_start
+          "year_display" $year_display
+          "summary" $summary
+          "certificate_url" $certificate_url
+          "date_sort" $date_sort
+        ) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $title := "" }}
+{{ with index $content "title" }}{{ $title = strings.TrimSpace (printf "%v" .) }}{{ end }}
+{{ $text := "" }}
+{{ with index $content "text" }}{{ $text = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ if or $title $text (gt (len $awards) 0) }}
+<div class="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
+  {{ with $title }}
+  <h2 class="mb-10 text-3xl font-bold text-gray-900 dark:text-white text-center">
+    {{ . | markdownify | emojify }}
+  </h2>
+  {{ end }}
+
+  {{ with $text }}
+  <div class="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 mb-6">
+    {{ . | markdownify | emojify }}
+  </div>
+  {{ end }}
+
+  {{ if gt (len $awards) 0 }}
+  <div class="flex flex-col gap-3">
+    {{ range sort $awards "date_sort" "desc" }}
+    {{ $award_url := index . "url" }}
+    {{ $award_link := "" }}
+    {{ $award_target := "" }}
+    {{ if $award_url }}
+      {{ $award_link = $award_url }}
+      {{ $scheme := (urls.Parse $award_link).Scheme }}
+      {{ if not $scheme }}
+        {{ if not (hasPrefix $award_link "#") }}
+          {{ $award_link = $award_link | relLangURL }}
+        {{ end }}
+        {{ if eq (path.Ext $award_link) ".pdf" }}{{ $award_target = "target=\"_blank\" rel=\"noopener\"" }}{{ end }}
+      {{ else if in (slice "http" "https") $scheme }}
+        {{ $award_target = "target=\"_blank\" rel=\"noopener\"" }}
+      {{ end }}
+    {{ end }}
+
+    <div class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3 py-1">
+      <div class="shrink-0 whitespace-nowrap font-semibold text-slate-700 dark:text-slate-300">
+        [{{ index . "year_display" }}]
+      </div>
+      <div class="min-w-0 text-slate-900 dark:text-slate-100">
+        {{ if $award_link }}
+        <a href="{{ $award_link | safeURL }}" {{ $award_target | safeHTMLAttr }} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+          {{ index . "title" | markdownify | emojify }}
+        </a>
+        {{ else }}
+        <span>{{ index . "title" | markdownify | emojify }}</span>
+        {{ end }}
+
+        {{ $awarder := index . "awarder" }}
+        {{ $summary := index . "summary" }}
+        {{ $certificate_url := index . "certificate_url" }}
+        {{ if or $awarder $summary $certificate_url }}
+        <div class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          {{ with $awarder }}<div>{{ . }}</div>{{ end }}
+          {{ with $summary }}<div class="prose dark:prose-invert max-w-none">{{ . | markdownify | emojify }}</div>{{ end }}
+          {{ if $certificate_url }}
+          {{ $certificate_link := $certificate_url }}
+          {{ $certificate_target := "" }}
+          {{ $certificate_scheme := (urls.Parse $certificate_link).Scheme }}
+          {{ if not $certificate_scheme }}
+            {{ if not (hasPrefix $certificate_link "#") }}
+              {{ $certificate_link = $certificate_link | relLangURL }}
+            {{ end }}
+            {{ if eq (path.Ext $certificate_link) ".pdf" }}{{ $certificate_target = "target=\"_blank\" rel=\"noopener\"" }}{{ end }}
+          {{ else if in (slice "http" "https") $certificate_scheme }}
+            {{ $certificate_target = "target=\"_blank\" rel=\"noopener\"" }}
+          {{ end }}
+          <a href="{{ $certificate_link | safeURL }}" {{ $certificate_target | safeHTMLAttr }} class="inline-flex items-center mt-1 text-primary-600 dark:text-primary-300 hover:underline">
+            {{ i18n "see_certificate" | default "See certificate" }}
+          </a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+{{ end }}
