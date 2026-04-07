@@ -1,0 +1,116 @@
+{{ $page := .page }}
+{{ $item := .item }}
+{{ $date_format := .date_format | default "January 2006" }}
+
+{{ $degree := "" }}
+{{ with index $item "degree" }}{{ $degree = strings.TrimSpace (printf "%v" .) }}{{ end }}
+{{ if not $degree }}{{ with index $item "area" }}{{ $degree = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+
+{{ $institution := "" }}
+{{ with index $item "institution" }}{{ $institution = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $icon := "" }}
+{{ with index $item "icon" }}{{ $icon = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $summary := "" }}
+{{ with index $item "summary" }}{{ $summary = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $date_display := "" }}
+{{ $start := "" }}
+{{ with index $item "start" }}{{ $start = strings.TrimSpace (printf "%v" .) }}{{ end }}
+{{ if not $start }}{{ with index $item "date_start" }}{{ $start = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+
+{{ $end := "" }}
+{{ with index $item "end" }}{{ $end = strings.TrimSpace (printf "%v" .) }}{{ end }}
+{{ if not $end }}{{ with index $item "date_end" }}{{ $end = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+
+{{ if $start }}
+  {{ $date_display = partial "functions/format_resume_date" (dict "value" $start "format" $date_format) }}
+  {{ if $end }}
+    {{ $date_display = printf "%s - %s" $date_display (partial "functions/format_resume_date" (dict "value" $end "format" $date_format)) }}
+  {{ else }}
+    {{ $date_display = printf "%s - %s" $date_display (i18n "present" | default "Present") }}
+  {{ end }}
+{{ else }}
+  {{ $year := "" }}
+  {{ with index $item "year" }}{{ $year = strings.TrimSpace (printf "%v" .) }}{{ end }}
+  {{ if $year }}
+    {{ $date_display = $year }}
+  {{ end }}
+{{ end }}
+
+<div class="h-full flex flex-col bg-gradient-to-br from-white/90 to-primary-50/30 dark:from-gray-800/90 dark:to-primary-900/20 rounded-xl p-6 shadow-sm dark:shadow-none border border-gray-200 dark:border-white/[0.06] backdrop-blur-md">
+  <div class="flex gap-4">
+    <div class="flex-shrink-0 w-12 h-12 bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700 rounded-full flex items-center justify-center shadow-md">
+      {{ if $icon }}
+        {{ partial "functions/get_icon" (dict "name" $icon "attributes" "class='w-6 h-6 text-primary-600 dark:text-primary-400'") }}
+      {{ else }}
+        {{ partial "functions/get_icon" (dict "name" "academic-cap" "attributes" "class='w-6 h-6 text-primary-600 dark:text-primary-400'") }}
+      {{ end }}
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+        <div class="min-w-0">
+          {{ with $degree }}
+          <p class="text-xl font-bold text-gray-900 dark:text-white">
+            {{ . }}
+          </p>
+          {{ end }}
+
+          {{ with $institution }}
+          <p class="text-gray-700 dark:text-gray-300 text-base mt-1">
+            {{ . }}
+          </p>
+          {{ end }}
+        </div>
+
+        {{ with $date_display }}
+        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <time>{{ . }}</time>
+        </div>
+        {{ end }}
+      </div>
+
+      {{ with $summary }}
+      <div class="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-400 leading-relaxed mt-4">
+        {{ . | emojify | $page.RenderString }}
+      </div>
+      {{ end }}
+
+      {{ $button := index $item "button" }}
+      {{ if reflect.IsMap $button }}
+        {{ $button_url := index $button "url" }}
+        {{ $button_text := index $button "text" | default "Learn more" }}
+        {{ $button_icon := index $button "icon" }}
+        {{ if $button_url }}
+        {{ $button_link := $button_url }}
+        {{ $button_target := "" }}
+        {{ $button_scheme := (urls.Parse $button_link).Scheme }}
+        {{ if not $button_scheme }}
+          {{ if not (hasPrefix $button_link "#") }}
+            {{ $button_link = $button_link | relLangURL }}
+          {{ end }}
+          {{ if eq (path.Ext $button_link) ".pdf" }}{{ $button_target = "target=\"_blank\" rel=\"noopener\"" }}{{ end }}
+        {{ else if in (slice "http" "https") $button_scheme }}
+          {{ $button_target = "target=\"_blank\" rel=\"noopener\"" }}
+        {{ end }}
+        <div class="mt-4 pt-4 border-t border-gray-100 dark:border-white/5">
+          <a href="{{ $button_link | safeURL }}" {{ $button_target | safeHTMLAttr }} class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+            {{ with $button_icon }}
+              {{ partial "functions/get_icon" (dict "name" . "attributes" "class='w-4 h-4'") }}
+            {{ end }}
+            {{ $button_text }}
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</div>

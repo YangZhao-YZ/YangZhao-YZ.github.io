@@ -38,57 +38,7 @@
   <div class="grid grid-cols-1 gap-6">
     {{ range $education }}
     {{ if reflect.IsMap . }}
-    {{ $degree := "" }}
-    {{ with index . "degree" }}{{ $degree = printf "%v" . }}{{ end }}
-    {{ if not $degree }}{{ with index . "area" }}{{ $degree = printf "%v" . }}{{ end }}{{ end }}
-    {{ $institution := "" }}
-    {{ with index . "institution" }}{{ $institution = printf "%v" . }}{{ end }}
-    {{ $icon := "" }}
-    {{ with index . "icon" }}{{ $icon = printf "%v" . }}{{ end }}
-    {{ $date_display := "" }}
-    {{ $year := "" }}
-    {{ with index . "year" }}{{ $year = strings.TrimSpace (printf "%v" .) }}{{ end }}
-    {{ if $year }}
-      {{ $date_display = $year }}
-    {{ else }}
-      {{ $start := "" }}
-      {{ with index . "start" }}{{ $start = strings.TrimSpace (printf "%v" .) }}{{ end }}
-      {{ if not $start }}{{ with index . "date_start" }}{{ $start = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
-      {{ $end := "" }}
-      {{ with index . "end" }}{{ $end = strings.TrimSpace (printf "%v" .) }}{{ end }}
-      {{ if not $end }}{{ with index . "date_end" }}{{ $end = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
-      {{ if $start }}
-        {{ $date_display = partial "functions/format_resume_date" (dict "value" $start "format" $date_format) }}
-        {{ if $end }}
-          {{ $date_display = printf "%s - %s" $date_display (partial "functions/format_resume_date" (dict "value" $end "format" $date_format)) }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-
-    <div class="h-full flex flex-col bg-gradient-to-br from-white/90 to-primary-50/30 dark:from-gray-800/90 dark:to-primary-900/20 rounded-xl p-6 shadow-sm dark:shadow-none border border-gray-200 dark:border-white/[0.06] backdrop-blur-md">
-      <div class="flex gap-4">
-        <div class="flex-shrink-0 w-12 h-12 bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700 rounded-full flex items-center justify-center shadow-md">
-          {{ if $icon }}
-            {{ partial "functions/get_icon" (dict "name" $icon "attributes" "class='w-6 h-6 text-primary-600 dark:text-primary-400'") }}
-          {{ else }}
-            {{ partial "functions/get_icon" (dict "name" "academic-cap" "attributes" "class='w-6 h-6 text-primary-600 dark:text-primary-400'") }}
-          {{ end }}
-        </div>
-        <div class="flex-1 min-w-0">
-          {{ with $degree }}
-          <p class="text-xl font-bold text-gray-900 dark:text-white">
-            {{ . }}
-          </p>
-          {{ end }}
-          {{ with $date_display }}
-          <p class="text-gray-500 dark:text-gray-400 text-sm mt-2">{{ . }}</p>
-          {{ end }}
-          {{ with $institution }}
-          <p class="text-gray-700 dark:text-gray-300 text-base">{{ . }}</p>
-          {{ end }}
-        </div>
-      </div>
-    </div>
+    {{ partial "views/education-card.html" (dict "item" . "page" $page "date_format" $date_format) }}
     {{ end }}
     {{ end }}
   </div>
