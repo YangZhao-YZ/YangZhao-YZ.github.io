@@ -54,6 +54,7 @@ sections:
     id: homepage-news
     content:
       page: /news/news
+      style: news-list
   - block: collection
     id: featured-publications
     content:

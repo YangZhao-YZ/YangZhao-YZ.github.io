@@ -12,6 +12,9 @@
   {{ $source = site.GetPage $sourcePath }}
 {{ end }}
 
+{{ $style := "" }}
+{{ with index $content "style" }}{{ $style = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
 {{ $title := "" }}
 {{ with index $content "title" }}{{ $title = printf "%v" . | emojify | $page.RenderString }}{{ end }}
 {{ if and (not $title) $source }}
@@ -23,6 +26,23 @@
   {{ $text = $source.Content }}
 {{ end }}
 
+{{ $rawText := "" }}
+{{ if $source }}
+  {{ $rawText = $source.RawContent }}
+{{ end }}
+
+{{ $newsItems := slice }}
+{{ if and (eq $style "news-list") $rawText }}
+  {{ range (split $rawText "\n") }}
+    {{ $line := strings.TrimSpace . }}
+    {{ if findRE "^[-*]\\s+\\[[^\\]]+\\]\\s+.+" $line }}
+      {{ $date := replaceRE "^[-*]\\s+\\[([^\\]]+)\\]\\s+(.+)$" "$1" $line }}
+      {{ $body := replaceRE "^[-*]\\s+\\[([^\\]]+)\\]\\s+(.+)$" "$2" $line }}
+      {{ $newsItems = $newsItems | append (dict "date" $date "body" ($body | markdownify)) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
 {{ if or $title $text }}
 <div class="mx-auto w-full max-w-4xl px-6">
   {{ with $title }}
@@ -31,10 +51,21 @@
   </div>
   {{ end }}
 
-  {{ with $text }}
-  <div class="prose prose-slate lg:prose-lg dark:prose-invert max-w-none">
-    {{ . }}
+  {{ if and (eq $style "news-list") (gt (len $newsItems) 0) }}
+  <div class="homepage-news-list">
+    {{ range $newsItems }}
+    <div class="homepage-news-item">
+      <div class="homepage-news-date">[{{ .date }}]</div>
+      <div class="homepage-news-body">{{ .body }}</div>
+    </div>
+    {{ end }}
   </div>
+  {{ else }}
+    {{ with $text }}
+    <div class="prose prose-slate lg:prose-lg dark:prose-invert max-w-none">
+      {{ . }}
+    </div>
+    {{ end }}
   {{ end }}
 </div>
 {{ end }}

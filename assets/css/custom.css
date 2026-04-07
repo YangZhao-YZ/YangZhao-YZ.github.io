@@ -5,3 +5,37 @@
 #section-resume-biography-3 .resume-biography .md\:col-span-8 > div > .flex.items-center.gap-4.mb-8 > .flex-shrink-0 {
   display: none;
 }
+
+.homepage-news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.homepage-news-item {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 0.35rem;
+  align-items: start;
+}
+
+.homepage-news-date {
+  color: #334155;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.homepage-news-body {
+  min-width: 0;
+}
+
+.homepage-news-body p {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .homepage-news-item {
+    grid-template-columns: 1fr;
+    row-gap: 0.25rem;
+  }
+}
