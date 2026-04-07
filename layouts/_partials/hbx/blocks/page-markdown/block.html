@@ -1,0 +1,40 @@
+{{/* Local block: render the content of a specific page as a homepage section. */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $content := $block.content }}
+{{ if not (reflect.IsMap $content) }}{{ $content = dict }}{{ end }}
+
+{{ $sourcePath := "" }}
+{{ with index $content "page" }}{{ $sourcePath = strings.TrimSpace (printf "%v" .) }}{{ end }}
+{{ $source := "" }}
+{{ if $sourcePath }}
+  {{ $source = site.GetPage $sourcePath }}
+{{ end }}
+
+{{ $title := "" }}
+{{ with index $content "title" }}{{ $title = printf "%v" . | emojify | $page.RenderString }}{{ end }}
+{{ if and (not $title) $source }}
+  {{ $title = $source.Title | emojify | $page.RenderString }}
+{{ end }}
+
+{{ $text := "" }}
+{{ if $source }}
+  {{ $text = $source.Content }}
+{{ end }}
+
+{{ if or $title $text }}
+<div class="mx-auto w-full max-w-4xl px-6">
+  {{ with $title }}
+  <div class="mb-6 text-3xl font-bold text-gray-900 dark:text-white text-center">
+    {{ . }}
+  </div>
+  {{ end }}
+
+  {{ with $text }}
+  <div class="prose prose-slate lg:prose-lg dark:prose-invert max-w-none">
+    {{ . }}
+  </div>
+  {{ end }}
+</div>
+{{ end }}
