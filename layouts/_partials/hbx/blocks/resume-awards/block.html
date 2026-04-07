@@ -92,7 +92,7 @@
 {{ if or $title $text (gt (len $awards) 0) }}
 <div class="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
   {{ with $title }}
-  <h2 class="mb-10 text-3xl font-bold text-gray-900 dark:text-white text-center">
+  <h2 class="mb-6 text-3xl font-bold text-gray-900 dark:text-white text-center">
     {{ . | markdownify | emojify }}
   </h2>
   {{ end }}
@@ -104,7 +104,7 @@
   {{ end }}
 
   {{ if gt (len $awards) 0 }}
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col gap-2">
     {{ range sort $awards "date_sort" "desc" }}
     {{ $award_url := index . "url" }}
     {{ $award_link := "" }}
@@ -122,7 +122,7 @@
       {{ end }}
     {{ end }}
 
-    <div class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3 py-1">
+    <div class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3">
       <div class="shrink-0 whitespace-nowrap font-semibold text-slate-700 dark:text-slate-300">
         [{{ index . "year_display" }}]
       </div>
