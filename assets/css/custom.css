@@ -1,3 +1,7 @@
 #section-resume-biography-3 .resume-biography .grid.grid-cols-1.md\:grid-cols-2.xl\:grid-cols-3 {
   grid-template-columns: 1fr !important;
 }
+
+#section-resume-biography-3 .resume-biography .md\:col-span-8 > div > .flex.items-center.gap-4.mb-8 > .flex-shrink-0 {
+  display: none;
+}
