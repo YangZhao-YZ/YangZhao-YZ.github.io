@@ -1,0 +1,22 @@
+{{/* Format resume dates while supporting month-only values like YYYY-MM. */}}
+
+{{- $value := "" -}}
+{{- with .value -}}
+  {{- $value = strings.TrimSpace (printf "%v" .) -}}
+{{- end -}}
+
+{{- $format := .format | default "Jan 2006" -}}
+{{- $output := $value -}}
+
+{{- if $value -}}
+  {{- $normalized := $value -}}
+  {{- if gt (len (findRE `^\d{4}-\d{2}$` $value)) 0 -}}
+    {{- $normalized = printf "%s-01" $value -}}
+  {{- end -}}
+  {{- $parsed := try (time $normalized) -}}
+  {{- if not $parsed.Err -}}
+    {{- $output = $parsed.Value | time.Format $format -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $output -}}
