@@ -32,8 +32,8 @@ links:
     url: https://www.linkedin.com/in/yang-zhao-b152991a2/
   - icon: academicons/google-scholar
     url: https://scholar.google.com/citations?user=qP0UoH0AAAAJ
-  - icon: academicons/orcid
-    url: https://orcid.org/0000-0003-2298-3936
+  # - icon: academicons/orcid
+  #   url: https://orcid.org/0000-0003-2298-3936
 
 # interests:
 #   - Large Language Models
