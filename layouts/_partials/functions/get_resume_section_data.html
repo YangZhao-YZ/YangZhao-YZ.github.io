@@ -1,0 +1,190 @@
+{{/*
+Load resume-style entries from a content section and normalize them for the
+custom resume blocks.
+
+Input:
+- dict "section": section name, e.g. "experience"
+
+Output:
+- dict:
+  - has_content: bool
+  - experience: slice
+  - education: slice
+  - awards: slice
+*/}}
+
+{{ $input := . }}
+{{ $section_name := "" }}
+{{ with index $input "section" }}
+  {{ $section_name = strings.TrimSpace (printf "%v" .) }}
+{{ end }}
+
+{{ $empty := dict "has_content" false "experience" (slice) "education" (slice) "awards" (slice) }}
+{{ $result := $empty }}
+
+{{ if $section_name }}
+  {{ $section_page := site.GetPage "section" $section_name }}
+  {{ if $section_page }}
+    {{ $pages := $section_page.RegularPagesRecursive }}
+    {{ if gt (len $pages) 0 }}
+      {{ $experience := slice }}
+      {{ $education := slice }}
+      {{ $awards := slice }}
+
+      {{ range $pages }}
+        {{ $resume_type := "" }}
+        {{ with index .Params "resume_type" }}
+          {{ $resume_type = lower (strings.TrimSpace (printf "%v" .)) }}
+        {{ end }}
+
+        {{ if $resume_type }}
+          {{ $summary := strings.TrimSpace .RawContent }}
+          {{ if not $summary }}
+            {{ with index .Params "summary" }}
+              {{ $summary = strings.TrimSpace (printf "%v" .) }}
+            {{ end }}
+          {{ end }}
+
+          {{ $icon := "" }}
+          {{ with index .Params "icon" }}
+            {{ $icon = strings.TrimSpace (printf "%v" .) }}
+          {{ end }}
+
+          {{ $start := "" }}
+          {{ with index .Params "start" }}
+            {{ $start = strings.TrimSpace (printf "%v" .) }}
+          {{ end }}
+          {{ if not $start }}
+            {{ with index .Params "date_start" }}
+              {{ $start = strings.TrimSpace (printf "%v" .) }}
+            {{ end }}
+          {{ end }}
+
+          {{ $end := "" }}
+          {{ with index .Params "end" }}
+            {{ $end = strings.TrimSpace (printf "%v" .) }}
+          {{ end }}
+          {{ if not $end }}
+            {{ with index .Params "date_end" }}
+              {{ $end = strings.TrimSpace (printf "%v" .) }}
+            {{ end }}
+          {{ end }}
+
+          {{ $date_display := "" }}
+          {{ with index .Params "date_display" }}
+            {{ $date_display = strings.TrimSpace (printf "%v" .) }}
+          {{ end }}
+
+          {{ $button_url := "" }}
+          {{ $button_text := "" }}
+          {{ $button_icon := "" }}
+          {{ $button_raw := index .Params "button" }}
+          {{ if reflect.IsMap $button_raw }}
+            {{ with index $button_raw "url" }}{{ $button_url = strings.TrimSpace (printf "%v" .) }}{{ end }}
+            {{ with index $button_raw "text" }}{{ $button_text = strings.TrimSpace (printf "%v" .) }}{{ end }}
+            {{ with index $button_raw "icon" }}{{ $button_icon = strings.TrimSpace (printf "%v" .) }}{{ end }}
+          {{ end }}
+
+          {{ $tags := slice }}
+          {{ $tags_raw := index .Params "tags" }}
+          {{ if reflect.IsSlice $tags_raw }}
+            {{ range $tags_raw }}
+              {{ $tag := strings.TrimSpace (printf "%v" .) }}
+              {{ if $tag }}{{ $tags = $tags | append $tag }}{{ end }}
+            {{ end }}
+          {{ else if eq (printf "%T" $tags_raw) "string" }}
+            {{ $tag_string := strings.TrimSpace $tags_raw }}
+            {{ if $tag_string }}
+              {{ if strings.Contains $tag_string "," }}
+                {{ range (split $tag_string ",") }}
+                  {{ $tag := strings.TrimSpace . }}
+                  {{ if $tag }}{{ $tags = $tags | append $tag }}{{ end }}
+                {{ end }}
+              {{ else }}
+                {{ $tags = slice $tag_string }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+
+          {{ $sort_date := .Date.Unix }}
+
+          {{ if eq $resume_type "experience" }}
+            {{ $title := .Title }}
+            {{ $subtitle := "" }}
+            {{ with index .Params "subtitle" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}
+            {{ if not $subtitle }}{{ with index .Params "org" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+            {{ if not $subtitle }}{{ with index .Params "organization" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+            {{ if not $subtitle }}{{ with index .Params "institution" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+            {{ if not $subtitle }}{{ with index .Params "role" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+
+            {{ $category := "" }}
+            {{ with index .Params "category" }}{{ $category = lower (strings.TrimSpace (printf "%v" .)) }}{{ end }}
+
+            {{ $experience = $experience | append (dict
+              "title" $title
+              "subtitle" $subtitle
+              "role" (index .Params "role")
+              "org" (index .Params "org")
+              "start" $start
+              "end" $end
+              "date_display" $date_display
+              "summary" $summary
+              "icon" $icon
+              "tags" $tags
+              "button" (dict "url" $button_url "text" $button_text "icon" $button_icon)
+              "category" $category
+              "sort_date" $sort_date
+            ) }}
+          {{ else if eq $resume_type "education" }}
+            {{ $degree := .Title }}
+            {{ with index .Params "degree" }}{{ $degree = strings.TrimSpace (printf "%v" .) }}{{ end }}
+            {{ $institution := "" }}
+            {{ with index .Params "institution" }}{{ $institution = strings.TrimSpace (printf "%v" .) }}{{ end }}
+            {{ $education = $education | append (dict
+              "degree" $degree
+              "institution" $institution
+              "start" $start
+              "end" $end
+              "date_display" $date_display
+              "summary" $summary
+              "icon" $icon
+              "button" (dict "url" $button_url "text" $button_text "icon" $button_icon)
+              "sort_date" $sort_date
+            ) }}
+          {{ else if eq $resume_type "award" }}
+            {{ $title := .Title }}
+            {{ $url := "" }}
+            {{ with index .Params "url" }}{{ $url = strings.TrimSpace (printf "%v" .) }}{{ end }}
+            {{ $awarder := "" }}
+            {{ with index .Params "awarder" }}{{ $awarder = strings.TrimSpace (printf "%v" .) }}{{ end }}
+            {{ $certificate_url := "" }}
+            {{ with index .Params "certificate_url" }}{{ $certificate_url = strings.TrimSpace (printf "%v" .) }}{{ end }}
+            {{ $year_display := "" }}
+            {{ with index .Params "year" }}{{ $year_display = strings.TrimSpace (printf "%v" .) }}{{ end }}
+            {{ if not $year_display }}
+              {{ $year_display = .Date | time.Format "2006" }}
+            {{ end }}
+            {{ $awards = $awards | append (dict
+              "title" $title
+              "url" $url
+              "awarder" $awarder
+              "summary" $summary
+              "certificate_url" $certificate_url
+              "year_display" $year_display
+              "date_sort" $sort_date
+            ) }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      {{ $result = dict
+        "has_content" true
+        "experience" $experience
+        "education" $education
+        "awards" $awards
+      }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $result | jsonify }}

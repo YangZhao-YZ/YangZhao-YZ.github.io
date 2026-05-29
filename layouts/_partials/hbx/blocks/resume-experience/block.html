@@ -23,7 +23,14 @@
 {{ if eq (printf "%T" $username_raw) "string" }}
   {{ $username = strings.TrimSpace $username_raw }}
 {{ end }}
+{{ $source_section := "" }}
+{{ with index $content "source_section" }}{{ $source_section = strings.TrimSpace (printf "%v" .) }}{{ end }}
 {{ $profile := partial "functions/get_author_profile" $username }}
+{{ $section_data := dict "has_content" false "experience" (slice) "education" (slice) }}
+{{ if $source_section }}
+  {{ $section_data = partial "functions/get_resume_section_data" (dict "section" $source_section) | transform.Unmarshal }}
+{{ end }}
+{{ $using_section_data := and $source_section (index $section_data "has_content") }}
 
 {{ $is_education_first := partial "functions/coerce_bool" (dict "value" (index $design "is_education_first") "default" false) }}
 {{ $show_experience := partial "functions/coerce_bool" (dict "value" (index $content "show_experience") "default" true) }}
@@ -43,7 +50,9 @@
 {{ end }}
 
 {{ $experience := slice }}
-{{ if gt (len $experience_iter) 0 }}
+{{ if $using_section_data }}
+  {{ $experience = sort (index $section_data "experience") "sort_date" "desc" }}
+{{ else if gt (len $experience_iter) 0 }}
   {{ range $experience_iter }}
     {{ if reflect.IsMap . }}
       {{ $role := "" }}
@@ -111,7 +120,9 @@
 {{ end }}
 
 {{ $education := slice }}
-{{ if gt (len $education_iter) 0 }}
+{{ if $using_section_data }}
+  {{ $education = sort (index $section_data "education") "sort_date" "desc" }}
+{{ else if gt (len $education_iter) 0 }}
   {{ range $education_iter }}
     {{ if reflect.IsMap . }}
       {{ $degree := "" }}
@@ -151,6 +162,33 @@
 {{ $has_experience := and $show_experience (gt (len $experience) 0) }}
 {{ $has_education := and $show_education (gt (len $education) 0) }}
 
+{{ $experience_categories := slice }}
+{{ $category_order_raw := index $content "experience_categories" }}
+{{ if reflect.IsSlice $category_order_raw }}
+  {{ range $category_order_raw }}
+    {{ $category := lower (strings.TrimSpace (printf "%v" .)) }}
+    {{ if $category }}{{ $experience_categories = $experience_categories | append $category }}{{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $category_titles := dict
+  "research" "Research Experience"
+  "teaching" "Teaching Experience"
+  "industry" "Industry Experience"
+  "projects" "Projects & Competitions"
+  "service" "Service & Leadership"
+}}
+{{ $category_titles_raw := index $content "category_titles" }}
+{{ if reflect.IsMap $category_titles_raw }}
+  {{ range $key, $value := $category_titles_raw }}
+    {{ $category_key := lower (strings.TrimSpace (printf "%v" $key)) }}
+    {{ $category_value := strings.TrimSpace (printf "%v" $value) }}
+    {{ if and $category_key $category_value }}
+      {{ $category_titles = merge $category_titles (dict $category_key $category_value) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
 <div class="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
 
 <div class="flex flex-col gap-16 {{ if $is_education_first }}flex-col-reverse{{end}}">
@@ -158,11 +196,41 @@
 {{ if $has_experience }}
 <div class="w-full">
   <h2 class="mb-10 text-3xl font-bold text-gray-900 dark:text-white text-center">{{ i18n "experience" | default "Experience" }}</h2>
+  {{ if and $using_section_data (gt (len $experience_categories) 0) }}
+  <div class="space-y-10">
+    {{ range $experience_categories }}
+      {{ $category := . }}
+      {{ $items := where $experience "category" $category }}
+      {{ if gt (len $items) 0 }}
+      <div>
+        <h3 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
+          {{ index $category_titles $category | default ($category | humanize | title) }}
+        </h3>
+        <div class="grid grid-cols-1 gap-6">
+          {{ range $items }}
+          {{ partial "views/experience-card.html" (dict "item" . "page" $page "date_format" $date_format) }}
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    {{ end }}
+
+    {{ $uncategorized := where $experience "category" "eq" "" }}
+    {{ if gt (len $uncategorized) 0 }}
+    <div class="grid grid-cols-1 gap-6">
+      {{ range $uncategorized }}
+      {{ partial "views/experience-card.html" (dict "item" . "page" $page "date_format" $date_format) }}
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+  {{ else }}
   <div class="grid grid-cols-1 gap-6">
     {{ range $experience }}
     {{ partial "views/experience-card.html" (dict "item" . "page" $page "date_format" $date_format) }}
     {{ end }}
   </div>
+  {{ end }}
 </div>
 {{ end }}
 

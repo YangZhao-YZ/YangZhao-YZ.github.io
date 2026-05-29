@@ -41,46 +41,6 @@ links:
 #   - Reinforcement Learning
 #   - AI Ethics
 
-education:
-  - degree: Ph.D. in Mechanical Engineering
-    institution: Northeastern University
-    start: 2024-09
-    end: 
-    icon: logo-neu.png
-    # summary: |
-    #   Thesis on scaling laws for neural language models. Published 5 papers in NeurIPS and ICML.
-    # button:
-    #   text: Download dissertation
-    #   url: /resume.pdf
-    #   icon: hero/arrow-down-tray
-  - degree: M.S. in Mechanical Engineering
-    institution: University of Illinois Urbana-Champaign
-    start: 2022-08
-    end: 2024-05
-    icon: logo-uiuc.png
-  - degree: B.Eng. in Electronic and Information Engineering
-    institution: Hong Kong Polytechnic University
-    start: 2018-09
-    end: 2022-05
-    icon: logo-polyu.png
-
-experience:
-  - role: Senior AI Research Scientist
-    org: Meta AI
-    start: 2020-01-01
-    summary: |
-      Leading research on multimodal AI systems. Contributed to Llama 2 and other open-source models.
-    button:
-      text: View portfolio
-      url: /
-      icon: hero/arrow-down-tray
-  - role: AI Research Intern
-    org: OpenAI
-    start: 2019-06-01
-    end: 2019-12-31
-    summary: |
-      Worked on GPT-3 scaling. Co-authored paper on prompt engineering.
-
 # skills:
 #   - name: Technical Skills
 #     items:
@@ -106,16 +66,3 @@ experience:
 #   - name: Spanish
 #     level: 4
 #     label: Fluent
-
-awards:
-  # - title: Best Paper Award
-  #   awarder: NeurIPS
-  #   date: "2022-12-01"
-  #   summary: Awarded for groundbreaking work on efficient training of large models.
-  #   icon: hero/trophy
-  - title: The Hong Kong Polytechnic University Scholarship 2021/22
-    year: 2021
-  - title: HKSAR Government Scholarship Fund - Talent Development Scholarship 2020/21
-    year: 2020
-  - title: Hong Kong Wanren Funding (2019 Globex Julmester @Peking University)
-    year: 2019

@@ -8,9 +8,16 @@
 {{ $design := $block.design }}
 {{ if not (reflect.IsMap $design) }}{{ $design = dict }}{{ end }}
 
+{{ $source_section := "" }}
+{{ with index $content "source_section" }}{{ $source_section = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
 {{ $username := "me" }}
 {{ with index $content "username" }}{{ $username = strings.TrimSpace (printf "%v" .) }}{{ end }}
 {{ $profile := partial "functions/get_author_profile" $username }}
+{{ $section_data := dict "has_content" false "education" (slice) }}
+{{ if $source_section }}
+  {{ $section_data = partial "functions/get_resume_section_data" (dict "section" $source_section) | transform.Unmarshal }}
+{{ end }}
 
 {{ $title := i18n "education" | default "Education" }}
 {{ with index $content "title" }}
@@ -23,7 +30,9 @@
 {{ end }}
 
 {{ $education := slice }}
-{{ if reflect.IsSlice $profile.education }}
+{{ if and $source_section (index $section_data "has_content") }}
+  {{ $education = sort (index $section_data "education") "sort_date" "desc" }}
+{{ else if reflect.IsSlice $profile.education }}
   {{ $education = $profile.education }}
 {{ else if and $profile.education (reflect.IsMap $profile.education) }}
   {{ $education = slice $profile.education }}

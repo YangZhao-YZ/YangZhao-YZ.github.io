@@ -41,7 +41,7 @@ sections:
   - block: homepage-education-cards
     id: homepage-education
     content:
-      username: me
+      source_section: experience
     design:
       date_format: 'January 2006'
   # - block: markdown

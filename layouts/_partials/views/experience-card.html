@@ -2,19 +2,24 @@
 {{ $item := .item }}
 {{ $date_format := .date_format | default "Jan 2006" }}
 
-{{ $role := "" }}
-{{ with index $item "role" }}{{ $role = strings.TrimSpace (printf "%v" .) }}{{ end }}
-{{ if not $role }}{{ with index $item "position" }}{{ $role = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+{{ $title := "" }}
+{{ with index $item "title" }}{{ $title = strings.TrimSpace (printf "%v" .) }}{{ end }}
+{{ if not $title }}{{ with index $item "role" }}{{ $title = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+{{ if not $title }}{{ with index $item "position" }}{{ $title = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
 
-{{ $org := "" }}
-{{ with index $item "org" }}{{ $org = strings.TrimSpace (printf "%v" .) }}{{ end }}
-{{ if not $org }}{{ with index $item "company_name" }}{{ $org = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+{{ $subtitle := "" }}
+{{ with index $item "subtitle" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}
+{{ if not $subtitle }}{{ with index $item "org" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+{{ if not $subtitle }}{{ with index $item "company_name" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
 
 {{ $icon := "" }}
 {{ with index $item "icon" }}{{ $icon = strings.TrimSpace (printf "%v" .) }}{{ end }}
 
 {{ $summary := "" }}
 {{ with index $item "summary" }}{{ $summary = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
+{{ $date_display := "" }}
+{{ with index $item "date_display" }}{{ $date_display = strings.TrimSpace (printf "%v" .) }}{{ end }}
 
 {{ $start := "" }}
 {{ with index $item "start" }}{{ $start = strings.TrimSpace (printf "%v" .) }}{{ end }}
@@ -37,13 +42,13 @@
     <div class="flex-1 min-w-0">
       <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
         <div class="min-w-0">
-          {{ with $role }}
+          {{ with $title }}
           <h3 class="text-xl font-bold text-gray-900 dark:text-white">
             {{ . }}
           </h3>
           {{ end }}
 
-          {{ with $org }}
+          {{ with $subtitle }}
           <p class="text-primary-600 dark:text-primary-400 font-medium mt-1">
             {{ . }}
           </p>
@@ -55,13 +60,17 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
           <time>
-            {{ if $start }}
-              {{ partial "functions/format_resume_date" (dict "value" $start "format" $date_format) }} –
-            {{ end }}
-            {{ if $end }}
-              {{ partial "functions/format_resume_date" (dict "value" $end "format" $date_format) }}
+            {{ if $date_display }}
+              {{ $date_display }}
             {{ else }}
-              <span class="text-primary-600 dark:text-primary-400 font-medium">{{ i18n "present" | default "Present" }}</span>
+              {{ if $start }}
+                {{ partial "functions/format_resume_date" (dict "value" $start "format" $date_format) }} –
+              {{ end }}
+              {{ if $end }}
+                {{ partial "functions/format_resume_date" (dict "value" $end "format" $date_format) }}
+              {{ else }}
+                <span class="text-primary-600 dark:text-primary-400 font-medium">{{ i18n "present" | default "Present" }}</span>
+              {{ end }}
             {{ end }}
           </time>
         </div>

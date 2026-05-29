@@ -8,11 +8,19 @@
 {{ $design := $block.design }}
 {{ if not (reflect.IsMap $design) }}{{ $design = dict }}{{ end }}
 
+{{ $source_section := "" }}
+{{ with index $content "source_section" }}
+  {{ $source_section = strings.TrimSpace (printf "%v" .) }}
+{{ end }}
 {{ $username := "me" }}
 {{ with index $content "username" }}
   {{ $username = strings.TrimSpace (printf "%v" .) }}
 {{ end }}
 {{ $profile := partial "functions/get_author_profile" $username }}
+{{ $section_data := dict "has_content" false "awards" (slice) }}
+{{ if $source_section }}
+  {{ $section_data = partial "functions/get_resume_section_data" (dict "section" $source_section) | transform.Unmarshal }}
+{{ end }}
 {{ $awards_raw := $profile.awards }}
 
 {{ $date_format := "January 2006" }}
@@ -30,7 +38,9 @@
 {{ end }}
 
 {{ $awards := slice }}
-{{ if gt (len $awards_iter) 0 }}
+{{ if and $source_section (index $section_data "has_content") }}
+  {{ $awards = sort (index $section_data "awards") "date_sort" "desc" }}
+{{ else if gt (len $awards_iter) 0 }}
   {{ range $awards_iter }}
     {{ if reflect.IsMap . }}
       {{ $title := "" }}
@@ -105,7 +115,7 @@
 
   {{ if gt (len $awards) 0 }}
   <div class="flex flex-col gap-2">
-    {{ range sort $awards "date_sort" "desc" }}
+    {{ range $awards }}
     {{ $award_url := index . "url" }}
     {{ $award_link := "" }}
     {{ $award_target := "" }}
