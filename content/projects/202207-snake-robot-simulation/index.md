@@ -1,6 +1,7 @@
 ---
 title: "Two-Joint Snake Robot Simulation"
 date: 2022-06-01
+draft: true
 summary: "A MuJoCo simulation project studying snake robot locomotion under different ground-friction models and reinforcement-learning controllers."
 tags:
   - Robotics

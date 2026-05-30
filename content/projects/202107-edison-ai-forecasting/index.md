@@ -1,6 +1,7 @@
 ---
 title: "Time-Series Forecasting for Automated-Store Demand"
 date: 2021-06-01
+draft: true
 summary: "A software engineering project developing forecasting models for automated-store customer demand under changing weather, traffic, and time conditions."
 tags:
   - Time-Series Forecasting

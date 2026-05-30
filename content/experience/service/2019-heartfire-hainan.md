@@ -7,7 +7,7 @@ subtitle: Team Member
 start: 2019-01
 end: 2019-01
 date_display: January 2019
-icon: hero/user-group
+icon: logo-heartfire.png
 location: Hainan, China
 ---
 - Provided volunteer teaching services to local primary- and high-school students.

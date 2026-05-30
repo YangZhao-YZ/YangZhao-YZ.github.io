@@ -6,7 +6,7 @@ category: research
 subtitle: Thesis Student
 start: 2021-07
 end: 2021-08
-icon: hero/beaker
+icon: logo-cambridge.png
 advisor: Prof. Marwa Mahmoud
 ---
 **Noise Effects on Low-Resolution Face Recognition Algorithms**

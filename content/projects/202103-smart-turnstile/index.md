@@ -1,6 +1,7 @@
 ---
 title: "Smart Turnstile System Based on ToF Sensor"
 date: 2020-12-01
+draft: true
 summary: "A microcontroller project integrating Arduino and a Time-of-Flight sensor for gesture-based turnstile control."
 tags:
   - Embedded Systems

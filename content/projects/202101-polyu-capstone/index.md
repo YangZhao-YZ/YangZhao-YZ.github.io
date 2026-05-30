@@ -1,6 +1,7 @@
 ---
 title: "Low-Resolution Face Recognition Algorithms and Noise Effects"
 date: 2021-01-01
+draft: true
 summary: "A capstone research project on low-resolution face recognition, alignment, and robustness to noise in surveillance-style imagery."
 tags:
   - Computer Vision

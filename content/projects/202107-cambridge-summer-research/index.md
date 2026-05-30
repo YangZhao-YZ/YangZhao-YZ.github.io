@@ -1,6 +1,7 @@
 ---
 title: "Noise Effects on Low-Resolution Face Recognition Algorithms"
 date: 2021-07-01
+draft: true
 summary: "A research project evaluating how realistic image noise affects low-resolution face recognition performance."
 tags:
   - Computer Vision
