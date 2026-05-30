@@ -29,7 +29,6 @@ links:
   - type: pdf
     url: https://ieeexplore.ieee.org/abstract/document/11311503
   - type: slides
-    label: Slides
     url: "ACC Presentation.pdf"
 
 # Featured image
