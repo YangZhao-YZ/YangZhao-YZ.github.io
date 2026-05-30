@@ -1,10 +1,14 @@
 :root {
   color-scheme: light;
   --site-primary: #13294b;
+  --site-primary-rgb: 19 41 75;
   --site-primary-strong: #0f203b;
   --site-secondary: #ff5f05;
+  --site-secondary-rgb: 255 95 5;
+  --site-on-secondary: #13294b;
   --site-accent: #c84113;
-  --site-link: #1d58a7;
+  --site-tertiary: #c84113;
+  --site-link: #13294b;
   --site-text: #252525;
   --site-muted: #707372;
   --site-border: #c8c6c7;
@@ -67,6 +71,71 @@
   --hb-secondary-950-rgb: 48 16 5;
 }
 
+html[data-site-theme="neu"] {
+  --site-primary: #000000;
+  --site-primary-rgb: 0 0 0;
+  --site-primary-strong: #000000;
+  --site-secondary: #c8102e;
+  --site-secondary-rgb: 200 16 46;
+  --site-on-secondary: #ffffff;
+  --site-accent: #c8102e;
+  --site-tertiary: #a4804a;
+  --site-link: #000000;
+  --site-text: #000000;
+  --site-muted: #4b4b4b;
+  --site-border: #d6d6d6;
+  --site-bg: #ffffff;
+  --site-bg-soft: #ffffff;
+
+  --color-primary-50: #f6f6f6;
+  --color-primary-100: #e7e7e7;
+  --color-primary-200: #d1d1d1;
+  --color-primary-300: #b0b0b0;
+  --color-primary-400: #888888;
+  --color-primary-500: #555555;
+  --color-primary-600: #000000;
+  --color-primary-700: #000000;
+  --color-primary-800: #000000;
+  --color-primary-900: #000000;
+  --color-primary-950: #000000;
+
+  --hb-primary-50-rgb: 246 246 246;
+  --hb-primary-100-rgb: 231 231 231;
+  --hb-primary-200-rgb: 209 209 209;
+  --hb-primary-300-rgb: 176 176 176;
+  --hb-primary-400-rgb: 136 136 136;
+  --hb-primary-500-rgb: 85 85 85;
+  --hb-primary-600-rgb: 0 0 0;
+  --hb-primary-700-rgb: 0 0 0;
+  --hb-primary-800-rgb: 0 0 0;
+  --hb-primary-900-rgb: 0 0 0;
+  --hb-primary-950-rgb: 0 0 0;
+
+  --color-secondary-50: #fff1f3;
+  --color-secondary-100: #ffe1e7;
+  --color-secondary-200: #ffc8d3;
+  --color-secondary-300: #ff9bad;
+  --color-secondary-400: #f8627b;
+  --color-secondary-500: #c8102e;
+  --color-secondary-600: #a60d26;
+  --color-secondary-700: #860a1f;
+  --color-secondary-800: #640817;
+  --color-secondary-900: #440510;
+  --color-secondary-950: #240308;
+
+  --hb-secondary-50-rgb: 255 241 243;
+  --hb-secondary-100-rgb: 255 225 231;
+  --hb-secondary-200-rgb: 255 200 211;
+  --hb-secondary-300-rgb: 255 155 173;
+  --hb-secondary-400-rgb: 248 98 123;
+  --hb-secondary-500-rgb: 200 16 46;
+  --hb-secondary-600-rgb: 166 13 38;
+  --hb-secondary-700-rgb: 134 10 31;
+  --hb-secondary-800-rgb: 100 8 23;
+  --hb-secondary-900-rgb: 68 5 16;
+  --hb-secondary-950-rgb: 36 3 8;
+}
+
 body {
   background: var(--site-bg);
   color: var(--site-text);
@@ -84,7 +153,7 @@ body {
 
 #site-header.header {
   border-bottom: 4px solid var(--site-secondary);
-  box-shadow: 0 8px 24px rgb(19 41 75 / 0.14);
+  box-shadow: 0 8px 24px rgb(var(--site-primary-rgb) / 0.14);
 }
 
 #site-header .navbar-brand,
@@ -148,14 +217,14 @@ body {
 
 .resume-biography .avatar {
   border-color: #ffffff;
-  box-shadow: 0 16px 36px rgb(19 41 75 / 0.22);
+  box-shadow: 0 16px 36px rgb(var(--site-primary-rgb) / 0.22);
 }
 
 .resume-biography a[href="/uploads/resume.pdf"] {
   background: var(--site-secondary);
-  color: var(--site-primary);
+  color: var(--site-on-secondary);
   border: 2px solid var(--site-secondary);
-  box-shadow: 0 12px 28px rgb(255 95 5 / 0.24);
+  box-shadow: 0 12px 28px rgb(var(--site-secondary-rgb) / 0.24);
 }
 
 .resume-biography a[href="/uploads/resume.pdf"]:hover,

@@ -1,0 +1,48 @@
+{{- $theme := site.Params.hugoblox.theme.school | default "uiuc" | lower -}}
+{{- if not (in (slice "uiuc" "neu") $theme) -}}
+  {{- $theme = "uiuc" -}}
+{{- end -}}
+<script>
+  (function() {
+    const defaultTheme = "{{ $theme }}";
+    const allowedThemes = ["uiuc", "neu"];
+    const themeLabels = {
+      uiuc: "UIUC",
+      neu: "NEU"
+    };
+
+    function normalizeTheme(theme) {
+      return allowedThemes.includes(theme) ? theme : defaultTheme;
+    }
+
+    function applyTheme(theme) {
+      const normalizedTheme = normalizeTheme(theme);
+      document.documentElement.dataset.siteTheme = normalizedTheme;
+      document.documentElement.setAttribute("data-theme-pack", normalizedTheme);
+      localStorage.setItem("hb-theme-pack", normalizedTheme);
+      return normalizedTheme;
+    }
+
+    const savedTheme = normalizeTheme(localStorage.getItem("hb-theme-pack"));
+    applyTheme(savedTheme);
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const picker = document.querySelector('select[onchange*="data-theme-pack"]');
+      if (!picker) return;
+
+      picker.innerHTML = "";
+      allowedThemes.forEach(function(theme) {
+        const option = document.createElement("option");
+        option.value = theme;
+        option.textContent = themeLabels[theme];
+        picker.appendChild(option);
+      });
+
+      picker.value = document.documentElement.dataset.siteTheme;
+      picker.setAttribute("aria-label", "School theme");
+      picker.addEventListener("change", function(event) {
+        applyTheme(event.target.value);
+      });
+    });
+  })();
+</script>
