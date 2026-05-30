@@ -1,0 +1,39 @@
+# HugoBlox Theme Pack
+
+hugoblox:
+  meta:
+    format: "hugoblox-theme@1"
+    name: "NEU"
+    vendor: "site"
+    version: "1.0.0"
+    license: "MIT"
+
+  type: "dual"
+
+  light:
+    colors:
+      primary: "#000000"
+      secondary: "#C8102E"
+    surfaces:
+      background: "#FFFFFF"
+      foreground: "#000000"
+      header:
+        background: "#000000"
+        foreground: "#FFFFFF"
+      footer:
+        background: "#000000"
+        foreground: "#FFFFFF"
+
+  dark:
+    colors:
+      primary: "#000000"
+      secondary: "#C8102E"
+    surfaces:
+      background: "#FFFFFF"
+      foreground: "#000000"
+      header:
+        background: "#000000"
+        foreground: "#FFFFFF"
+      footer:
+        background: "#000000"
+        foreground: "#FFFFFF"

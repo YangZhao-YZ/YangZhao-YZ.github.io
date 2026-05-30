@@ -1,0 +1,39 @@
+# HugoBlox Theme Pack
+
+hugoblox:
+  meta:
+    format: "hugoblox-theme@1"
+    name: "UIUC"
+    vendor: "site"
+    version: "1.0.0"
+    license: "MIT"
+
+  type: "dual"
+
+  light:
+    colors:
+      primary: "#13294B"
+      secondary: "#FF5F05"
+    surfaces:
+      background: "#FFFFFF"
+      foreground: "#252525"
+      header:
+        background: "#13294B"
+        foreground: "#FFFFFF"
+      footer:
+        background: "#13294B"
+        foreground: "#FFFFFF"
+
+  dark:
+    colors:
+      primary: "#13294B"
+      secondary: "#FF5F05"
+    surfaces:
+      background: "#FFFFFF"
+      foreground: "#252525"
+      header:
+        background: "#13294B"
+        foreground: "#FFFFFF"
+      footer:
+        background: "#13294B"
+        foreground: "#FFFFFF"

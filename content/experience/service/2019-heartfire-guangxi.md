@@ -7,7 +7,7 @@ subtitle: Vice Team Leader
 start: 2019-08
 end: 2019-08
 date_display: August 2019
-icon: hero/user-group
+icon: logo-heartfire.png
 location: Guangxi, China
 ---
 - Led a team of eight volunteers to provide teaching services at a local primary school.

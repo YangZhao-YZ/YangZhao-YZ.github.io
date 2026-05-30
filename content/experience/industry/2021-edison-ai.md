@@ -6,7 +6,7 @@ category: industry
 subtitle: Software Engineer (Remote)
 start: 2021-06
 end: 2021-07
-icon: hero/briefcase
+icon: logo-edisonai.png
 location: Tokyo, Japan
 ---
 - Independently developed [time sequence forecasting models](https://github.com/ttezy/Time-Sequence-Analysis) for automated-store customer demand under changing weather, traffic, and time conditions.

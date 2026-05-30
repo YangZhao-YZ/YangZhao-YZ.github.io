@@ -28,6 +28,8 @@ featured: true
 links:
   - type: pdf
     url: https://ieeexplore.ieee.org/abstract/document/11311503
+  - type: slides
+    url: "ACC Presentation.pdf"
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder. 

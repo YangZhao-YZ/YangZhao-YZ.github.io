@@ -1,3 +1,286 @@
+:root {
+  color-scheme: light;
+  --site-primary: #13294b;
+  --site-primary-rgb: 19 41 75;
+  --site-primary-strong: #0f203b;
+  --site-secondary: #ff5f05;
+  --site-secondary-rgb: 255 95 5;
+  --site-on-secondary: #13294b;
+  --site-accent: #c84113;
+  --site-tertiary: #c84113;
+  --site-link: #13294b;
+  --site-text: #252525;
+  --site-muted: #707372;
+  --site-border: #c8c6c7;
+  --site-bg: #ffffff;
+  --site-bg-soft: #ffffff;
+
+  --hb-color-background: var(--site-bg);
+  --hb-color-foreground: var(--site-text);
+  --hb-color-header-bg: var(--site-primary);
+  --hb-color-header-fg: #ffffff;
+  --hb-color-footer-bg: var(--site-primary);
+  --hb-color-footer-fg: #ffffff;
+
+  --color-primary-50: #eef5ff;
+  --color-primary-100: #d9e8fb;
+  --color-primary-200: #b8d4f4;
+  --color-primary-300: #83b4e8;
+  --color-primary-400: #4a8ed7;
+  --color-primary-500: #1d58a7;
+  --color-primary-600: #13294b;
+  --color-primary-700: #10213d;
+  --color-primary-800: #0c1a30;
+  --color-primary-900: #081224;
+  --color-primary-950: #050b16;
+
+  --hb-primary-50-rgb: 238 245 255;
+  --hb-primary-100-rgb: 217 232 251;
+  --hb-primary-200-rgb: 184 212 244;
+  --hb-primary-300-rgb: 131 180 232;
+  --hb-primary-400-rgb: 74 142 215;
+  --hb-primary-500-rgb: 29 88 167;
+  --hb-primary-600-rgb: 19 41 75;
+  --hb-primary-700-rgb: 16 33 61;
+  --hb-primary-800-rgb: 12 26 48;
+  --hb-primary-900-rgb: 8 18 36;
+  --hb-primary-950-rgb: 5 11 22;
+
+  --color-secondary-50: #fff4ed;
+  --color-secondary-100: #ffe3d0;
+  --color-secondary-200: #ffc29d;
+  --color-secondary-300: #ff9d63;
+  --color-secondary-400: #ff7a32;
+  --color-secondary-500: #ff5f05;
+  --color-secondary-600: #c84113;
+  --color-secondary-700: #9f3010;
+  --color-secondary-800: #76240c;
+  --color-secondary-900: #551a09;
+  --color-secondary-950: #301005;
+
+  --hb-secondary-50-rgb: 255 244 237;
+  --hb-secondary-100-rgb: 255 227 208;
+  --hb-secondary-200-rgb: 255 194 157;
+  --hb-secondary-300-rgb: 255 157 99;
+  --hb-secondary-400-rgb: 255 122 50;
+  --hb-secondary-500-rgb: 255 95 5;
+  --hb-secondary-600-rgb: 200 65 19;
+  --hb-secondary-700-rgb: 159 48 16;
+  --hb-secondary-800-rgb: 118 36 12;
+  --hb-secondary-900-rgb: 85 26 9;
+  --hb-secondary-950-rgb: 48 16 5;
+}
+
+html[data-site-theme="neu"] {
+  --site-primary: #000000;
+  --site-primary-rgb: 0 0 0;
+  --site-primary-strong: #000000;
+  --site-secondary: #c8102e;
+  --site-secondary-rgb: 200 16 46;
+  --site-on-secondary: #ffffff;
+  --site-accent: #c8102e;
+  --site-tertiary: #a4804a;
+  --site-link: #000000;
+  --site-text: #000000;
+  --site-muted: #4b4b4b;
+  --site-border: #d6d6d6;
+  --site-bg: #ffffff;
+  --site-bg-soft: #ffffff;
+
+  --color-primary-50: #f6f6f6;
+  --color-primary-100: #e7e7e7;
+  --color-primary-200: #d1d1d1;
+  --color-primary-300: #b0b0b0;
+  --color-primary-400: #888888;
+  --color-primary-500: #555555;
+  --color-primary-600: #000000;
+  --color-primary-700: #000000;
+  --color-primary-800: #000000;
+  --color-primary-900: #000000;
+  --color-primary-950: #000000;
+
+  --hb-primary-50-rgb: 246 246 246;
+  --hb-primary-100-rgb: 231 231 231;
+  --hb-primary-200-rgb: 209 209 209;
+  --hb-primary-300-rgb: 176 176 176;
+  --hb-primary-400-rgb: 136 136 136;
+  --hb-primary-500-rgb: 85 85 85;
+  --hb-primary-600-rgb: 0 0 0;
+  --hb-primary-700-rgb: 0 0 0;
+  --hb-primary-800-rgb: 0 0 0;
+  --hb-primary-900-rgb: 0 0 0;
+  --hb-primary-950-rgb: 0 0 0;
+
+  --color-secondary-50: #fff1f3;
+  --color-secondary-100: #ffe1e7;
+  --color-secondary-200: #ffc8d3;
+  --color-secondary-300: #ff9bad;
+  --color-secondary-400: #f8627b;
+  --color-secondary-500: #c8102e;
+  --color-secondary-600: #a60d26;
+  --color-secondary-700: #860a1f;
+  --color-secondary-800: #640817;
+  --color-secondary-900: #440510;
+  --color-secondary-950: #240308;
+
+  --hb-secondary-50-rgb: 255 241 243;
+  --hb-secondary-100-rgb: 255 225 231;
+  --hb-secondary-200-rgb: 255 200 211;
+  --hb-secondary-300-rgb: 255 155 173;
+  --hb-secondary-400-rgb: 248 98 123;
+  --hb-secondary-500-rgb: 200 16 46;
+  --hb-secondary-600-rgb: 166 13 38;
+  --hb-secondary-700-rgb: 134 10 31;
+  --hb-secondary-800-rgb: 100 8 23;
+  --hb-secondary-900-rgb: 68 5 16;
+  --hb-secondary-950-rgb: 36 3 8;
+}
+
+body {
+  background: var(--site-bg);
+  color: var(--site-text);
+}
+
+.page-body,
+.page-body .hbb-section,
+.page-body .home-section-bg {
+  background: var(--site-bg);
+}
+
+#section-resume-biography-3 {
+  padding-top: 0 !important;
+}
+
+#site-header.header {
+  border-bottom: 4px solid var(--site-secondary);
+  box-shadow: 0 8px 24px rgb(var(--site-primary-rgb) / 0.14);
+}
+
+#site-header .navbar-brand,
+#site-header .nav-link,
+#site-header [data-search-toggle],
+#site-header label[for="nav-toggle"] {
+  color: #ffffff;
+}
+
+#site-header .navbar-brand {
+  font-weight: 800;
+}
+
+#site-header .nav-link {
+  position: relative;
+}
+
+#site-header .nav-link:hover,
+#site-header .nav-link.active {
+  color: var(--site-secondary);
+}
+
+#site-header .nav-link.active::after {
+  content: "";
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.45rem;
+  left: 0.75rem;
+  height: 2px;
+  background: currentColor;
+}
+
+#site-header [data-search-toggle]:hover {
+  color: var(--site-secondary);
+}
+
+.page-body :where(h1, h2, h3, h4, h5, h6),
+.page-body :where(.text-gray-900, .text-slate-900, .text-zinc-900) {
+  color: var(--site-primary);
+}
+
+.page-body a[href]:not(.nav-link):not(.navbar-brand):not([class*="rounded-full"]):not([class*="inline-flex"]) {
+  color: var(--site-link);
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, var(--site-link) 45%, transparent);
+  text-underline-offset: 0.16em;
+  transition:
+    color 150ms ease,
+    text-decoration-color 150ms ease;
+}
+
+.page-body a[href]:not(.nav-link):not(.navbar-brand):not([class*="rounded-full"]):not([class*="inline-flex"]):hover,
+.page-body a[href]:not(.nav-link):not(.navbar-brand):not([class*="rounded-full"]):not([class*="inline-flex"]):focus {
+  color: var(--site-accent);
+  text-decoration-color: currentColor;
+}
+
+.resume-biography {
+  background: var(--site-bg);
+}
+
+.resume-biography .avatar {
+  border-color: #ffffff;
+  box-shadow: 0 16px 36px rgb(var(--site-primary-rgb) / 0.22);
+}
+
+.resume-biography a[href="/uploads/resume.pdf"] {
+  background: var(--site-secondary);
+  color: var(--site-on-secondary);
+  border: 2px solid var(--site-secondary);
+  box-shadow: 0 12px 28px rgb(var(--site-secondary-rgb) / 0.24);
+}
+
+.resume-biography a[href="/uploads/resume.pdf"]:hover,
+.resume-biography a[href="/uploads/resume.pdf"]:focus {
+  background: var(--site-primary);
+  color: #ffffff;
+  border-color: var(--site-primary);
+}
+
+#homepage-education,
+#featured-publications {
+  background: var(--site-bg-soft);
+}
+
+#homepage-education .h-full,
+.resume-experience-card,
+.resume-education-card {
+  border-color: rgb(200 198 199 / 0.8);
+}
+
+.homepage-news-date {
+  color: var(--site-primary);
+}
+
+.publication-authors {
+  color: var(--site-muted);
+}
+
+.publication-author-self {
+  color: var(--site-primary);
+  font-weight: 800;
+}
+
+.page-footer {
+  margin-top: 4rem;
+  background: var(--site-primary);
+  color: #ffffff;
+  border-top: 4px solid var(--site-secondary);
+}
+
+.page-footer footer {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-block: 2rem;
+  color: #ffffff;
+}
+
+.page-footer a {
+  color: #ffffff;
+}
+
+.page-footer a:hover,
+.page-footer a:focus {
+  color: var(--site-secondary);
+}
+
 #section-resume-biography-3 .resume-biography .grid.grid-cols-1.md\:grid-cols-2.xl\:grid-cols-3 {
   grid-template-columns: 1fr !important;
 }
@@ -21,9 +304,9 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--color-primary-300) 18%,
-    var(--color-primary-500) 50%,
-    var(--color-secondary-300) 82%,
+    var(--site-primary) 18%,
+    var(--site-primary) 50%,
+    var(--site-primary) 82%,
     transparent 100%
   );
   opacity: 0.45;
@@ -41,9 +324,9 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--color-primary-300) 18%,
-    var(--color-primary-500) 50%,
-    var(--color-secondary-300) 82%,
+    var(--site-primary) 18%,
+    var(--site-primary) 50%,
+    var(--site-primary) 82%,
     transparent 100%
   );
   opacity: 0.45;
@@ -64,9 +347,9 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--color-primary-300) 18%,
-    var(--color-primary-500) 50%,
-    var(--color-secondary-300) 82%,
+    var(--site-primary) 18%,
+    var(--site-primary) 50%,
+    var(--site-primary) 82%,
     transparent 100%
   );
   opacity: 0.45;
@@ -83,12 +366,6 @@
   grid-template-columns: max-content minmax(0, 1fr);
   column-gap: 0.35rem;
   align-items: start;
-}
-
-.homepage-news-date {
-  color: #334155;
-  font-weight: 600;
-  white-space: nowrap;
 }
 
 .homepage-news-body {
