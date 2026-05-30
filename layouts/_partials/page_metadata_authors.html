@@ -12,9 +12,10 @@
     {{- $slug := $raw | urlize -}}
     {{- $profile := partial "functions/get_author_profile" (dict "slug" $slug "title" $raw) -}}
     {{- $display := $profile.title | default $raw -}}
+    {{- $is_self := or (eq (lower (strings.TrimSpace $display)) "yang zhao") (eq $slug "yang-zhao") -}}
 
     {{- if gt $index 0 }}, {{ end -}}
-    <span>{{- $display -}}</span>
+    <span{{ if $is_self }} class="publication-author-self"{{ end }}>{{- $display -}}</span>
     {{- if isset $.Params "author_notes" -}}
       {{- with (index $.Params.author_notes $index) -}}
         <span class="relative inline-block ml-1" x-data="{ tooltip: false }">
