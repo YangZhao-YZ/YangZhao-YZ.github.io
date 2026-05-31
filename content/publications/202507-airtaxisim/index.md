@@ -35,6 +35,9 @@ featured: false
 links:
   - type: pdf
     url: https://arc.aiaa.org/doi/abs/10.2514/6.2025-3349
+  - type: code
+    url: https://github.com/CPS-IL/airtaxisim
+
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder. 

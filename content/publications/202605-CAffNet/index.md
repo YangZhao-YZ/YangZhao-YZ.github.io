@@ -20,7 +20,7 @@ tags:
 featured: true
 
 links:
-  - type: pdf
+  - type: preprint
     url: https://arxiv.org/abs/2605.24437
 
 image:

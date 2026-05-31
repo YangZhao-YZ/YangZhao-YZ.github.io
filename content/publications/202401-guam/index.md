@@ -35,13 +35,11 @@ tags:
   - Adaptive Control
 featured: true
 
-hugoblox:
-  ids:
-    arxiv: 2312.02937
-
 links:
   - type: pdf
     url: https://arc.aiaa.org/doi/abs/10.2514/6.2024-1167
+  - type: preprint
+    url: https://arxiv.org/abs/2312.02937
   - type: slides
     url: https://ayooshbansal.com/assets/pdf/scitech2024.pdf
 
