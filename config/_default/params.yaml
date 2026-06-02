@@ -34,13 +34,13 @@ hugoblox:
     # Mode: 'light', 'dark', or 'system' (follows OS preference)
     mode: light
     # Theme pack: name from data/themes/ or { light: "x", dark: "y" } for mix-and-match
-    pack: "default"
+    pack: "neu"
     # School theme preset: uiuc | neu
-    school: uiuc
+    school: neu
     # Optional: Override theme pack colors
     colors:
-      primary: "#13294B"               # Tailwind palette name or hex (e.g., "indigo" or "#6366f1")
-      secondary: "#FF5F05"
+      primary: "#000000"               # Tailwind palette name or hex (e.g., "indigo" or "#6366f1")
+      secondary: "#C8102E"
       neutral: ""                       # Affects gray utilities (text-gray-*, bg-gray-*)
     # Optional: Mode-specific color overrides
     colors_light: {}
@@ -48,12 +48,12 @@ hugoblox:
     # Optional: Semantic surface color overrides
     surfaces:
       background: "#FFFFFF"
-      foreground: "#252525"
+      foreground: "#000000"
       header:
-        background: "#13294B"
+        background: "#000000"
         foreground: "#FFFFFF"
       footer:
-        background: "#13294B"
+        background: "#000000"
         foreground: "#FFFFFF"
 
   # ────────────────────────────────────────────────────────────────────────────
