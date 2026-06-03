@@ -129,6 +129,7 @@
     {{ if reflect.IsMap . }}
       {{ $degree := "" }}
       {{ $institution := "" }}
+      {{ $location := "" }}
       {{ $start := "" }}
       {{ $end := "" }}
       {{ $summary := "" }}
@@ -140,6 +141,7 @@
       {{ with index . "degree" }}{{ $degree = strings.TrimSpace (printf "%v" .) }}{{ end }}
       {{ if not $degree }}{{ with index . "area" }}{{ $degree = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
       {{ with index . "institution" }}{{ $institution = strings.TrimSpace (printf "%v" .) }}{{ end }}
+      {{ with index . "location" }}{{ $location = strings.TrimSpace (printf "%v" .) }}{{ end }}
       {{ with index . "start" }}{{ $start = strings.TrimSpace (printf "%v" .) }}{{ end }}
       {{ if not $start }}{{ with index . "date_start" }}{{ $start = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
       {{ with index . "end" }}{{ $end = strings.TrimSpace (printf "%v" .) }}{{ end }}
@@ -155,7 +157,7 @@
       {{ end }}
 
       {{ if or $degree $institution }}
-        {{ $education = $education | append (dict "degree" $degree "institution" $institution "start" $start "end" $end "summary" $summary "icon" $icon "button" (dict "url" $button_url "text" $button_text "icon" $button_icon)) }}
+        {{ $education = $education | append (dict "degree" $degree "institution" $institution "location" $location "start" $start "end" $end "summary" $summary "icon" $icon "button" (dict "url" $button_url "text" $button_text "icon" $button_icon)) }}
       {{ end }}
     {{ end }}
   {{ end }}
