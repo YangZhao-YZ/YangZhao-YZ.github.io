@@ -79,9 +79,13 @@
           {{ end }}
 
           {{ with $location }}
-          <p class="shrink-0 leading-6 text-gray-600 dark:text-gray-300 sm:text-right">
-            {{ . }}
-          </p>
+          <div class="flex items-center gap-2 leading-6 text-gray-600 dark:text-gray-300 shrink-0 sm:justify-end sm:text-right">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z" />
+              <circle cx="12" cy="10" r="2.5" stroke-width="2" />
+            </svg>
+            <span>{{ . }}</span>
+          </div>
           {{ end }}
         </div>
       </div>
