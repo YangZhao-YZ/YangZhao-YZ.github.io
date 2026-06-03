@@ -1,9 +1,10 @@
 ---
-title: Capstone Project, Hong Kong Polytechnic University
+title: Capstone Project
 date: 2021-01-01
 resume_type: experience
 category: research
 subtitle: Thesis Student
+institution: Hong Kong Polytechnic University
 start: 2021-01
 end: 2021-12
 icon: logo-polyu.png

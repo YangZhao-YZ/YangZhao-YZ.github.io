@@ -111,11 +111,12 @@ Output:
           {{ if eq $resume_type "experience" }}
             {{ $title := .Title }}
             {{ $subtitle := "" }}
+            {{ $institution := "" }}
             {{ with index .Params "subtitle" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}
             {{ if not $subtitle }}{{ with index .Params "org" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
             {{ if not $subtitle }}{{ with index .Params "organization" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
-            {{ if not $subtitle }}{{ with index .Params "institution" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
             {{ if not $subtitle }}{{ with index .Params "role" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
+            {{ with index .Params "institution" }}{{ $institution = strings.TrimSpace (printf "%v" .) }}{{ end }}
 
             {{ $category := "" }}
             {{ with index .Params "category" }}{{ $category = lower (strings.TrimSpace (printf "%v" .)) }}{{ end }}
@@ -125,6 +126,7 @@ Output:
               "subtitle" $subtitle
               "role" (index .Params "role")
               "org" (index .Params "org")
+              "institution" $institution
               "start" $start
               "end" $end
               "date_display" $date_display

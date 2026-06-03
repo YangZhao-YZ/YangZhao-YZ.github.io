@@ -12,6 +12,9 @@
 {{ if not $subtitle }}{{ with index $item "org" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
 {{ if not $subtitle }}{{ with index $item "company_name" }}{{ $subtitle = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
 
+{{ $institution := "" }}
+{{ with index $item "institution" }}{{ $institution = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
 {{ $icon := "" }}
 {{ with index $item "icon" }}{{ $icon = strings.TrimSpace (printf "%v" .) }}{{ end }}
 
@@ -40,39 +43,47 @@
     </div>
 
     <div class="flex-1 min-w-0">
-      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-        <div class="min-w-0">
+      <div class="experience-card-header mb-3">
+        <div class="experience-card-header-row">
           {{ with $title }}
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+          <h3 class="experience-card-title text-xl font-bold leading-7 text-gray-900 dark:text-white">
             {{ . }}
           </h3>
           {{ end }}
 
+          <div class="experience-card-date flex items-center gap-2 leading-6 text-gray-500 dark:text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <time>
+              {{ if $date_display }}
+                {{ $date_display }}
+              {{ else }}
+                {{ if $start }}
+                  {{ partial "functions/format_resume_date" (dict "value" $start "format" $date_format) }} –
+                {{ end }}
+                {{ if $end }}
+                  {{ partial "functions/format_resume_date" (dict "value" $end "format" $date_format) }}
+                {{ else }}
+                  <span class="text-primary-600 dark:text-primary-400 font-medium">{{ i18n "present" | default "Present" }}</span>
+                {{ end }}
+              {{ end }}
+            </time>
+          </div>
+        </div>
+
+        <div class="experience-card-header-row">
           {{ with $subtitle }}
-          <p class="text-primary-600 dark:text-primary-400 font-medium mt-1">
+          <p class="experience-card-subtitle text-primary-600 dark:text-primary-400 font-medium leading-6">
             {{ . }}
           </p>
           {{ end }}
-        </div>
 
-        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          <time>
-            {{ if $date_display }}
-              {{ $date_display }}
-            {{ else }}
-              {{ if $start }}
-                {{ partial "functions/format_resume_date" (dict "value" $start "format" $date_format) }} –
-              {{ end }}
-              {{ if $end }}
-                {{ partial "functions/format_resume_date" (dict "value" $end "format" $date_format) }}
-              {{ else }}
-                <span class="text-primary-600 dark:text-primary-400 font-medium">{{ i18n "present" | default "Present" }}</span>
-              {{ end }}
-            {{ end }}
-          </time>
+          {{ with $institution }}
+          <p class="experience-card-institution leading-6 text-gray-600 dark:text-gray-300">
+            {{ . }}
+          </p>
+          {{ end }}
         </div>
       </div>
 

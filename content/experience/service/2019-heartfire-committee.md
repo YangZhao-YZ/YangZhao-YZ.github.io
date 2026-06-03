@@ -1,9 +1,10 @@
 ---
-title: HeartFire, 8th Committee, Hong Kong Polytechnic University
+title: HeartFire, 8th Committee
 date: 2019-04-01
 resume_type: experience
 category: service
 subtitle: Human Resources Manager
+institution: Hong Kong Polytechnic University
 start: 2019-04
 end: 2020-04
 icon: logo-heartfire.png

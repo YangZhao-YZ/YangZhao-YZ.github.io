@@ -249,6 +249,53 @@ body {
   color: var(--site-primary);
 }
 
+.experience-card-header {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.25rem;
+  min-width: 0;
+}
+
+.experience-card-header-row {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.25rem;
+  min-width: 0;
+}
+
+.experience-card-title,
+.experience-card-subtitle {
+  min-width: 0;
+}
+
+.experience-card-date {
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .experience-card-header-row {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: 1rem;
+  }
+
+  .experience-card-date,
+  .experience-card-institution {
+    flex: 0 0 auto;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .experience-card-date {
+    justify-content: flex-end;
+  }
+
+  .experience-card-institution {
+    white-space: nowrap;
+  }
+}
+
 .publication-authors {
   color: var(--site-muted);
 }

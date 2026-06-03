@@ -1,9 +1,10 @@
 ---
-title: Advanced Controls Research Laboratory, University of Illinois Urbana-Champaign
+title: Advanced Controls Research Laboratory
 date: 2023-01-01
 resume_type: experience
 category: research
 subtitle: Graduate Research Assistant
+institution: University of Illinois Urbana-Champaign
 start: 2023-01
 end: 2024-05
 icon: logo-uiuc.png

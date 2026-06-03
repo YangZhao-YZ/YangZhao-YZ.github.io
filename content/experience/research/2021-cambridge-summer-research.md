@@ -1,9 +1,10 @@
 ---
-title: Online Summer Research Programme, University of Cambridge
+title: Online Summer Research Programme
 date: 2021-07-01
 resume_type: experience
 category: research
 subtitle: Thesis Student
+institution: University of Cambridge
 start: 2021-07
 end: 2021-08
 icon: logo-cambridge.png

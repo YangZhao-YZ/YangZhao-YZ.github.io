@@ -1,9 +1,10 @@
 ---
-title: Intelligent Control and Estimation of Things Lab, Northeastern University
+title: Intelligent Control and Estimation of Things Lab
 date: 2024-07-01
 resume_type: experience
 category: research
 subtitle: Graduate Research Assistant
+institution: Northeastern University
 start: 2024-07
 end:
 icon: logo-neu.png

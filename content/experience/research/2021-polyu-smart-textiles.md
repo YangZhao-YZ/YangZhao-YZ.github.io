@@ -1,9 +1,10 @@
 ---
-title: Smart Textiles and Apparel Research Group, Hong Kong Polytechnic University
+title: Smart Textiles and Apparel Research Group
 date: 2020-05-01
 resume_type: experience
 category: research
 subtitle: Undergraduate Research Assistant
+institution: Hong Kong Polytechnic University
 start: 2020-05
 end: 2021-08
 icon: logo-polyu.png
