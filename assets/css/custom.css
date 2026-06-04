@@ -272,6 +272,13 @@ body {
   min-width: 0;
 }
 
+.experience-card-meta {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  row-gap: 0.25rem;
+}
+
 @media (min-width: 640px) {
   .experience-card-header-row {
     flex-direction: row;
@@ -281,13 +288,14 @@ body {
   }
 
   .experience-card-date,
-  .experience-card-institution {
+  .experience-card-meta {
     flex: 0 0 auto;
     margin-left: auto;
     text-align: right;
   }
 
-  .experience-card-date {
+  .experience-card-date,
+  .experience-card-location {
     justify-content: flex-end;
   }
 

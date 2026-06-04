@@ -15,6 +15,9 @@
 {{ $institution := "" }}
 {{ with index $item "institution" }}{{ $institution = strings.TrimSpace (printf "%v" .) }}{{ end }}
 
+{{ $location := "" }}
+{{ with index $item "location" }}{{ $location = strings.TrimSpace (printf "%v" .) }}{{ end }}
+
 {{ $icon := "" }}
 {{ with index $item "icon" }}{{ $icon = strings.TrimSpace (printf "%v" .) }}{{ end }}
 
@@ -79,10 +82,24 @@
           </p>
           {{ end }}
 
-          {{ with $institution }}
-          <p class="experience-card-institution leading-6 text-gray-600 dark:text-gray-300">
-            {{ . }}
-          </p>
+          {{ if or $institution $location }}
+          <div class="experience-card-meta">
+            {{ with $institution }}
+            <p class="experience-card-institution leading-6 text-gray-600 dark:text-gray-300">
+              {{ . }}
+            </p>
+            {{ end }}
+
+            {{ with $location }}
+            <div class="experience-card-location flex items-center gap-2 leading-6 text-gray-600 dark:text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z" />
+                <circle cx="12" cy="10" r="2.5" stroke-width="2" />
+              </svg>
+              <span>{{ . }}</span>
+            </div>
+            {{ end }}
+          </div>
           {{ end }}
         </div>
       </div>

@@ -1,11 +1,12 @@
 ---
-title: Service-Learning Trip, Kyoto, Japan
+title: Service-Learning Trip
 date: 2019-06-01
 resume_type: experience
 category: service
 subtitle: Group Member
 start: 2019-06
 end: 2019-06
+location: Kyoto, Japan
 date_display: June 2019
 icon: logo-polyu.png
 ---

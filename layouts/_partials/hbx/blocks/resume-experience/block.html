@@ -58,6 +58,7 @@
       {{ $role := "" }}
       {{ $org := "" }}
       {{ $institution := "" }}
+      {{ $location := "" }}
       {{ $start := "" }}
       {{ $end := "" }}
       {{ $summary := "" }}
@@ -72,6 +73,7 @@
       {{ with index . "org" }}{{ $org = strings.TrimSpace (printf "%v" .) }}{{ end }}
       {{ if not $org }}{{ with index . "company_name" }}{{ $org = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
       {{ with index . "institution" }}{{ $institution = strings.TrimSpace (printf "%v" .) }}{{ end }}
+      {{ with index . "location" }}{{ $location = strings.TrimSpace (printf "%v" .) }}{{ end }}
       {{ with index . "start" }}{{ $start = strings.TrimSpace (printf "%v" .) }}{{ end }}
       {{ if not $start }}{{ with index . "date_start" }}{{ $start = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
       {{ with index . "end" }}{{ $end = strings.TrimSpace (printf "%v" .) }}{{ end }}
@@ -107,7 +109,7 @@
       {{ end }}
 
       {{ if or $role $org }}
-        {{ $experience = $experience | append (dict "role" $role "org" $org "institution" $institution "start" $start "end" $end "summary" $summary "icon" $icon "tags" $tags "button" (dict "url" $button_url "text" $button_text "icon" $button_icon)) }}
+        {{ $experience = $experience | append (dict "role" $role "org" $org "institution" $institution "location" $location "start" $start "end" $end "summary" $summary "icon" $icon "tags" $tags "button" (dict "url" $button_url "text" $button_text "icon" $button_icon)) }}
       {{ end }}
     {{ end }}
   {{ end }}

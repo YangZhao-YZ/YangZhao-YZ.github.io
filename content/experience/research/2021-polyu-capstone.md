@@ -8,7 +8,6 @@ institution: Hong Kong Polytechnic University
 start: 2021-01
 end: 2021-12
 icon: logo-polyu.png
-location: Hong Kong, China
 advisor: Prof. Kenneth K. M. Lam
 ---
 **Low-Resolution Face Recognition Algorithms and Noise Effects**

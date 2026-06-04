@@ -8,7 +8,6 @@ institution: Northeastern University
 start: 2024-07
 end:
 icon: logo-neu.png
-location: Boston, MA
 advisor: Prof. Sze Zheng Yong
 ---
 **Safe learning and control for autonomous systems, with formal constraint-satisfaction and safety guarantees**

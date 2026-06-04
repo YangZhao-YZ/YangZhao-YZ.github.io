@@ -8,7 +8,6 @@ institution: University of Illinois Urbana-Champaign
 start: 2023-01
 end: 2024-05
 icon: logo-uiuc.png
-location: Champaign, IL
 advisor: Prof. Naira Hovakimyan
 ---
 **Safe autonomy, motion planning, and control for robotic systems**
