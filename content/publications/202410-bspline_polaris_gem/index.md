@@ -28,7 +28,9 @@ featured: true
 
 links:
   - type: pdf
-    url: https://ieeexplore.ieee.org/abstract/document/11311503
+    url: https://ieeexplore.ieee.org/abstract/document/10802083
+  - type: preprint
+    url: https://arxiv.org/pdf/2404.00133
   - type: video
     url: https://www.youtube.com/watch?v=mQK9Md8BxRA
 
