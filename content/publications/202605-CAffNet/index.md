@@ -22,6 +22,8 @@ featured: true
 links:
   - type: preprint
     url: https://arxiv.org/abs/2605.24437
+  - type: slides
+    url: "ICML Poster.pdf"
   - type: code
     url: https://github.com/ice-t-lab/CAffNet-Hard-Constraint-Affine-Neural-Networks
 
