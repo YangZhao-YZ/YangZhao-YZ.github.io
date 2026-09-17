@@ -21,7 +21,7 @@ publishDate: "2025-07-16"
 
 # Publication name and optional abbreviated publication name.
 publication: "AIAA AVIATION FORUM AND ASCEND 2025"
-publication_short: ""
+publication_short: "AIAA"
 
 abstract: The rapid advancements in air mobility vehicles is paving the way for air taxis to become a viable mode of public transportation. The next technological frontier for air taxis is fully autonomous operation. Developing safe and efficient autonomous control for air taxis presents greater challenges than for ground vehicles due to the inherent instability of aerial vehicles. Therefore, simulation solutions for autonomous air taxis will play a crucial role in accelerating their development and eventual safe deployment. This paper introduces AirTaxiSim, an end to end simulation framework for autonomous air taxis. AirTaxiSim is designed to model and analyze the complexities of autonomous air taxi operations in dynamic and cluttered urban environments. AirTaxiSim integrates high fidelity physical models of vertical take-off and landing air vehicles in photo-realistic urban environments. The primary purpose of AirTaxiSim is to evaluate the safety, performance, and efficiency of autonomous air taxi services, across a variety of scenarios, including dangerous edge cases. AirTaxiSim also provides methods for generating datasets and establishing benchmarks for autonomous air taxis. This paper describes the simulator’s construction, functionalities, and some of the use cases, providing critical information to facilitate its use in advancing autonomy in aerial vehicles.
 
