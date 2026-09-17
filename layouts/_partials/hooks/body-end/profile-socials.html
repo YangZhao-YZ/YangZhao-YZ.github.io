@@ -1,0 +1,36 @@
+{{/* Enhance the upstream school links and the Cyberpunk links without forking
+     the upstream biography template. Original links still work without JS. */}}
+<script>
+  (function() {
+    const links = document.querySelectorAll(
+      '#section-resume-biography-3 .school-biography .resume-biography a[aria-label], #section-resume-biography-3 .cp-socials a'
+    );
+
+    links.forEach(function(link) {
+      const name = link.getAttribute('title');
+      const icon = link.querySelector('svg');
+      if (!name || !icon) return;
+
+      const group = link.parentElement;
+      group.classList.add('profile-socials');
+      group.setAttribute('role', 'group');
+      group.setAttribute('aria-label', 'Contact and social profiles');
+      group.parentElement.classList.add('profile-social-container');
+
+      // Replace the upstream fixed width and hover utilities with one shared UI.
+      link.className = 'profile-social-link inline-flex';
+      link.setAttribute('aria-label', name);
+      link.removeAttribute('title');
+      icon.setAttribute('aria-hidden', 'true');
+      icon.setAttribute('focusable', 'false');
+
+      const label = document.createElement('span');
+      label.className = 'profile-social-label';
+      label.setAttribute('aria-hidden', 'true');
+      const text = document.createElement('span');
+      text.textContent = name;
+      label.appendChild(text);
+      link.appendChild(label);
+    });
+  })();
+</script>
