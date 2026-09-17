@@ -25,13 +25,16 @@ affiliations:
 links:
   - icon: hero/envelope
     url: mailto:zhao.yang12@northeastern.edu
-    label: E-mail Me
+    label: Email
   - icon: brands/github
     url: https://github.com/YangZhao-YZ
+    label: GitHub
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/yang-zhao-b152991a2/
+    label: LinkedIn
   - icon: academicons/google-scholar
     url: https://scholar.google.com/citations?user=qP0UoH0AAAAJ
+    label: Google Scholar
   # - icon: academicons/orcid
   #   url: https://orcid.org/0000-0003-2298-3936
 

@@ -10,6 +10,14 @@ All three themes show the venue abbreviation and publication year above each
 homepage featured-publication title. This metadata uses the school accent color
 in Northeastern and Illinois, and cyan in Cyberpunk.
 
+Homepage contact links expand on hover or keyboard focus, revealing Email,
+GitHub, LinkedIn, or Google Scholar beside the icon. Width and fade animate
+together; reduced-motion settings reveal labels instantly. Narrow profile
+columns and touch devices keep labels visible and wrap the links. Labels come from
+`data/authors/me.yaml`; a small progressive enhancement in
+`layouts/_partials/hooks/body-end/profile-socials.html` adapts both biography
+variants while leaving the upstream school template intact.
+
 ## Cyberpunk website direction
 
 The design follows the official website's alternating acid-yellow and black

@@ -276,6 +276,138 @@ body {
   box-shadow: 0 16px 36px rgb(var(--site-primary-rgb) / 0.22);
 }
 
+/* Intrinsic label widths keep the reveal in sync without measuring text in JS. */
+.profile-social-container {
+  container: profile-links / inline-size;
+}
+
+.profile-socials {
+  --social-fill: var(--site-bg);
+  --social-color: var(--site-primary);
+  --social-border: var(--site-border);
+  --social-active: var(--site-accent);
+  --social-active-fill: color-mix(in srgb, var(--site-secondary) 8%, var(--site-bg));
+  --social-radius: 999px;
+  --social-shadow: 0 3px 10px rgb(var(--site-primary-rgb) / 0.08);
+  --social-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.profile-socials .profile-social-link {
+  --label-track: 0fr;
+  --label-gap: 0rem;
+  --label-opacity: 0;
+  --label-offset: -0.35rem;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.5625rem;
+  border: 1px solid var(--social-border);
+  border-radius: var(--social-radius);
+  background: var(--social-fill);
+  color: var(--social-color);
+  box-shadow: var(--social-shadow);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: background-color 200ms ease,
+    color 200ms ease, border-color 200ms ease;
+}
+
+.profile-social-link svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+}
+
+.profile-social-label {
+  display: grid;
+  grid-template-columns: minmax(0, var(--label-track));
+  margin-inline-start: var(--label-gap);
+  transition: grid-template-columns 300ms var(--social-ease),
+    margin-inline-start 300ms var(--social-ease);
+}
+
+.profile-social-label > span {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: var(--label-opacity);
+  transform: translateX(var(--label-offset));
+  transition: opacity 220ms ease, transform 300ms var(--social-ease);
+}
+
+.profile-socials .profile-social-link:is(:hover, :focus-visible) {
+  --label-track: 1fr;
+  --label-gap: 0.5rem;
+  --label-opacity: 1;
+  --label-offset: 0;
+  color: var(--social-active);
+  border-color: var(--social-active);
+  background: var(--social-active-fill);
+}
+
+/* Keep only the hovered label open when a different link retains focus. */
+.profile-socials:has(.profile-social-link:hover) .profile-social-link:not(:hover) {
+  --label-track: 0fr;
+  --label-gap: 0rem;
+  --label-opacity: 0;
+  --label-offset: -0.35rem;
+  transform: none;
+}
+
+.profile-social-link:focus-visible {
+  outline: 2px solid var(--social-active);
+  outline-offset: 3px;
+}
+
+/* Narrow profile columns and touch screens show labels without a first tap. */
+@container profile-links (max-width: 22rem) {
+  .profile-socials {
+    flex-wrap: wrap;
+  }
+
+  .profile-socials .profile-social-link {
+    --label-track: 1fr !important;
+    --label-gap: 0.5rem !important;
+    --label-opacity: 1 !important;
+    --label-offset: 0 !important;
+  }
+}
+
+@media (max-width: 767px), (hover: none), (pointer: coarse) {
+  .profile-socials {
+    flex-wrap: wrap;
+    max-width: 22rem;
+    margin-inline: auto;
+  }
+
+  .profile-socials .profile-social-link {
+    --label-track: 1fr !important;
+    --label-gap: 0.5rem !important;
+    --label-opacity: 1 !important;
+    --label-offset: 0 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-socials .profile-social-link,
+  .profile-social-label,
+  .profile-social-label > span {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
 .resume-biography a[href="/uploads/resume.pdf"] {
   background: var(--site-secondary);
   color: var(--site-on-secondary);
