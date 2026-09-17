@@ -25,6 +25,11 @@ Education stays in stacked rows on yellow, news on black, and stacked publicatio
 rows on yellow. Subtle cyan dot grids fade across the black section backgrounds.
 On mobile the profile and biography stack within the same section.
 
+Featured publication figures sit on inset white canvases inside dark frames with
+cyan corner brackets. The frame separates the white figures from the yellow
+section background. Figures retain their original colors and fit without cropping
+or hover zoom; the frame moves above the publication text on mobile.
+
 The separator uses a local SVG mask with long flat runs, irregular triangular
 notches, small negative-space cuts, and detached barcode-like marks. Its minimum
 rendered width preserves these fine details on mobile rather than compressing
