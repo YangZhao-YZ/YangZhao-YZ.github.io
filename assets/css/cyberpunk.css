@@ -699,7 +699,7 @@ html[data-site-theme="cyberpunk"] .featured-publication-copy {
   flex-direction: column;
   width: 100%;
 }
-html[data-site-theme="cyberpunk"] .cp-publication-meta {
+html[data-site-theme="cyberpunk"] .featured-publication-meta {
   display: flex;
   justify-content: space-between;
   gap: 1rem;

@@ -141,9 +141,8 @@ body {
   color: var(--site-text);
 }
 
-/* The alternative profile styling and card annotations belong to the Cyberpunk preset. */
-.cyberpunk-biography,
-.cp-publication-meta {
+/* The alternative profile styling belongs to the Cyberpunk preset. */
+.cyberpunk-biography {
   display: none;
 }
 
@@ -294,6 +293,24 @@ body {
 #homepage-education,
 #featured-publications {
   background: var(--site-bg-soft);
+}
+
+.featured-publication-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--site-accent);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.featured-publication-meta > :last-child {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
 }
 
 #homepage-education .h-full,

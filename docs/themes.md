@@ -6,6 +6,10 @@ default. Internal keys remain `neu`, `uiuc`, and `cyberpunk`, so existing select
 persist between pages and visits using `hb-theme-pack` in local storage. The control's
 tooltip identifies the current theme, and keyboard/screen-reader behavior remains native.
 
+All three themes show the venue abbreviation and publication year above each
+homepage featured-publication title. This metadata uses the school accent color
+in Northeastern and Illinois, and cyan in Cyberpunk.
+
 ## Cyberpunk website direction
 
 The design follows the official website's alternating acid-yellow and black
