@@ -6,6 +6,10 @@ default. Internal keys remain `neu`, `uiuc`, and `cyberpunk`, so existing select
 persist between pages and visits using `hb-theme-pack` in local storage. The control's
 tooltip identifies the current theme, and keyboard/screen-reader behavior remains native.
 
+All three themes show the venue abbreviation and publication year above each
+homepage featured-publication title. This metadata uses the school accent color
+in Northeastern and Illinois, and cyan in Cyberpunk.
+
 ## Cyberpunk website direction
 
 The design follows the official website's alternating acid-yellow and black
@@ -24,6 +28,11 @@ on the left, with the biography and CV button on the right.
 Education stays in stacked rows on yellow, news on black, and stacked publication
 rows on yellow. Subtle cyan dot grids fade across the black section backgrounds.
 On mobile the profile and biography stack within the same section.
+
+Featured publication figures sit on inset white canvases inside dark frames with
+cyan corner brackets. The frame separates the white figures from the yellow
+section background. Figures retain their original colors and fit without cropping
+or hover zoom; the frame moves above the publication text on mobile.
 
 The separator uses a local SVG mask with long flat runs, irregular triangular
 notches, small negative-space cuts, and detached barcode-like marks. Its minimum

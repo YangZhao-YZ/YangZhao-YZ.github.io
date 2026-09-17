@@ -178,7 +178,8 @@ html[data-site-theme="cyberpunk"] #site-header .navbar-brand:focus-visible {
 html[data-site-theme="cyberpunk"] #site-header .navbar-brand {
   display: inline-flex;
   align-items: center;
-  padding: 0.4rem 1.1rem;
+  /* Balance Teko's uppercase glyphs without changing the chip's height. */
+  padding: calc(0.4rem + 0.08em) 1.1rem calc(0.4rem - 0.08em);
   font-family: var(--cp-heading);
   font-size: 2rem;
   line-height: 1;
@@ -649,14 +650,47 @@ html[data-site-theme="cyberpunk"] .featured-publication-layout {
   align-items: stretch;
 }
 html[data-site-theme="cyberpunk"] .featured-publication-image {
+  --cp-image-inset: 1rem;
+  display: flex;
   width: 100%;
   min-height: 15rem;
-  background: #fff;
+  aspect-ratio: auto;
+  padding: var(--cp-image-inset);
+  background: #080d0f;
   border-radius: 0;
-  border-right: 3px solid #63f4f2;
+  border-right: 1px solid #3c5050;
+}
+/* An inset white canvas keeps scientific figures intact inside a dark frame. */
+html[data-site-theme="cyberpunk"] .featured-publication-image > a {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #415b5d;
+}
+html[data-site-theme="cyberpunk"] .featured-publication-image::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--cp-image-inset) - 4px);
+  pointer-events: none;
+  color: #63f4f2;
+  background:
+    linear-gradient(currentColor,currentColor) left top / 14px 2px,
+    linear-gradient(currentColor,currentColor) left top / 2px 14px,
+    linear-gradient(currentColor,currentColor) right top / 14px 2px,
+    linear-gradient(currentColor,currentColor) right top / 2px 14px,
+    linear-gradient(currentColor,currentColor) left bottom / 14px 2px,
+    linear-gradient(currentColor,currentColor) left bottom / 2px 14px,
+    linear-gradient(currentColor,currentColor) right bottom / 14px 2px,
+    linear-gradient(currentColor,currentColor) right bottom / 2px 14px;
+  background-repeat: no-repeat;
 }
 html[data-site-theme="cyberpunk"] .featured-publication-image img {
   object-fit: contain;
+  scale: 1;
+  transform: none;
 }
 html[data-site-theme="cyberpunk"] .featured-publication-copy {
   padding: 1.7rem;
@@ -665,7 +699,7 @@ html[data-site-theme="cyberpunk"] .featured-publication-copy {
   flex-direction: column;
   width: 100%;
 }
-html[data-site-theme="cyberpunk"] .cp-publication-meta {
+html[data-site-theme="cyberpunk"] .featured-publication-meta {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -799,7 +833,7 @@ html[data-site-theme="cyberpunk"] .page-header [x-data="searchModal()"] {
     min-height: 0;
     aspect-ratio: 16/9;
     border-right: 0;
-    border-bottom: 3px solid #63f4f2;
+    border-bottom: 1px solid #3c5050;
   }
   html[data-site-theme="cyberpunk"] .featured-publication-copy {
     padding: 1.3rem;

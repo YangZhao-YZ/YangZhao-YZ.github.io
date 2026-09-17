@@ -11,7 +11,7 @@ publishDate: "2025-12-22"
 
 # Publication name and optional abbreviated publication name.
 publication: "IEEE Control Systems Letters"
-publication_short: ""
+publication_short: "L-CSS"
 
 abstract: This letter presents an output-feedback tube-based model predictive control (MPC) framework for linear sampled-data control systems subject to external disturbances and non-convex constraints. The proposed approach rigorously incorporates inter-sample reachability analysis to account for the continuous-time evolution of system trajectories between discrete sampling instances and to ensure constraint satisfaction in the continuous time domain. The resulting continuous-time tube-based MPC scheme is demonstrated to ensure that trajectories remain within (potentially non-convex) safe sets throughout the continuous-time evolution.
 
