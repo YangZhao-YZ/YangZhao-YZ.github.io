@@ -35,9 +35,9 @@
 {{ with index $item "end" }}{{ $end = strings.TrimSpace (printf "%v" .) }}{{ end }}
 {{ if not $end }}{{ with index $item "date_end" }}{{ $end = strings.TrimSpace (printf "%v" .) }}{{ end }}{{ end }}
 
-<div class="h-full flex flex-col bg-gradient-to-br from-white/90 to-primary-50/30 dark:from-gray-800/90 dark:to-primary-900/20 rounded-xl p-6 shadow-sm dark:shadow-none border border-gray-200 dark:border-white/[0.06] backdrop-blur-md">
+<div class="site-experience-card h-full flex flex-col bg-gradient-to-br from-white/90 to-primary-50/30 dark:from-gray-800/90 dark:to-primary-900/20 rounded-xl p-6 shadow-sm dark:shadow-none border border-gray-200 dark:border-white/[0.06] backdrop-blur-md">
   <div class="flex gap-4">
-    <div class="flex-shrink-0 w-12 h-12 bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700 rounded-full flex items-center justify-center shadow-md">
+    <div class="site-resume-icon flex-shrink-0 w-12 h-12 bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700 rounded-full flex items-center justify-center shadow-md" data-logo-treatment="{{ if in (slice "logo-cambridge.png" "logo-edisonai.png" "logo-heartfire.png") (path.Base $icon) }}ink{{ else }}silhouette{{ end }}">
       {{ if $icon }}
         {{ partial "functions/get_icon" (dict "name" $icon "attributes" "class='w-6 h-6 text-primary-600 dark:text-primary-400'") }}
       {{ else }}

@@ -35,7 +35,7 @@ hugoblox:
     mode: light
     # Theme pack: name from data/themes/ or { light: "x", dark: "y" } for mix-and-match
     pack: "neu"
-    # School theme preset: uiuc | neu
+    # Site theme preset: uiuc | neu | cyberpunk (legacy key: school)
     school: neu
     # Optional: Override theme pack colors
     colors:

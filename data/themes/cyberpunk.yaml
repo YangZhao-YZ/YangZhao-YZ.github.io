@@ -1,0 +1,23 @@
+# Cyberpunk 2077 website-inspired preset with yellow and dark sections.
+hugoblox:
+  meta:
+    format: "hugoblox-theme@1"
+    name: "Cyberpunk 2077"
+    vendor: "site"
+    version: "1.0.0"
+    license: "MIT"
+  type: "dual"
+  light: &cyberpunk
+    colors:
+      primary: "#FCEE0A"
+      secondary: "#FCEE0A"
+    surfaces:
+      background: "#080808"
+      foreground: "#DEE5EA"
+      header:
+        background: "#FCEE0A"
+        foreground: "#080808"
+      footer:
+        background: "#080808"
+        foreground: "#DEE5EA"
+  dark: *cyberpunk

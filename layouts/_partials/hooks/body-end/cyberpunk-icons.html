@@ -1,0 +1,16 @@
+{{/* Recolor existing logos at render time, preserving the original image assets.
+     Ink treatment removes white pixels and retains detail in multicolor crests. */}}
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;overflow:hidden;pointer-events:none">
+  <defs>
+    <filter id="cp-logo-silhouette" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
+      <feColorMatrix type="matrix" values="0 0 0 0 0.988235  0 0 0 0 0.933333  0 0 0 0 0.039216  0 0 0 1 0" />
+    </filter>
+    <filter id="cp-logo-ink" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
+      <feColorMatrix type="matrix" values="0 0 0 0 0.988235  0 0 0 0 0.933333  0 0 0 0 0.039216  -0.2126 -0.7152 -0.0722 0 1" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="1.5" />
+      </feComponentTransfer>
+      <feComposite in2="SourceAlpha" operator="in" />
+    </filter>
+  </defs>
+</svg>

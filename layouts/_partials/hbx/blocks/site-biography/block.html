@@ -1,0 +1,44 @@
+{{/* Keep the upstream biography intact for the school themes. */}}
+<div class="school-biography">
+  {{ partial "hbx/blocks/resume-biography-3/block.html" . }}
+</div>
+
+{{ $page := .wcPage }}
+{{ $content := .wcBlock.content }}
+{{ $profile := partial "functions/get_author_profile" ($content.username | default "me") }}
+<div class="cyberpunk-biography">
+  <div class="cp-profile-layout">
+    <div class="cp-profile-identity">
+      {{ with $profile.avatar }}
+      {{ $portrait := .Fill "400x400 Center webp" }}
+      <div class="cp-portrait">
+        <div class="cp-portrait-frame">
+          <img src="{{ $portrait.RelPermalink }}" width="200" height="200" alt="{{ $profile.title }}" fetchpriority="high" decoding="async">
+        </div>
+      </div>
+      {{ end }}
+      <div class="cp-profile-details">
+        <h1 class="cp-name" data-text="{{ $profile.title }}" aria-label="{{ $profile.title }}">{{ $profile.title }}</h1>
+        <p class="cp-role">{{ $profile.role }}</p>
+        {{ range $profile.affiliations }}
+        <p class="cp-affiliation">{{ with .url }}<a href="{{ . | safeURL }}" target="_blank" rel="noopener">{{ end }}{{ .name }}{{ if .url }}</a>{{ end }}</p>
+        {{ end }}
+      </div>
+      <div class="cp-socials" aria-label="Social links">
+        {{ range $profile.links }}
+        {{ $label := .label | default (replace (path.Base .icon) "-" " " | title) }}
+        <a class="inline-flex" href="{{ .url | safeURL }}" aria-label="{{ $label }}" title="{{ $label }}" {{ if hasPrefix .url "http" }}target="_blank" rel="noopener"{{ end }}>
+          {{ partial "functions/get_icon" (dict "name" .icon "attributes" "class='cp-social-icon'") }}
+        </a>
+        {{ end }}
+      </div>
+    </div>
+    <div class="cp-profile-bio">
+      <h2>{{ $content.headings.about | default "About Me" }}</h2>
+      <div class="cp-about-text prose prose-lg max-w-none">{{ ($content.text | default $profile.bio) | $page.RenderString }}</div>
+      {{ with $content.button }}
+      <a class="cp-button inline-flex" href="{{ .url | relURL }}" target="_blank" rel="noopener">{{ .text }} <span aria-hidden="true">↓</span></a>
+      {{ end }}
+    </div>
+  </div>
+</div>

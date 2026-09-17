@@ -1,0 +1,843 @@
+/* Official-site direction: alternating yellow/black sections, cyan dots, and cut edges.
+   Fonts are self-hosted SIL OFL alternatives; see static/fonts/cyberpunk/. */
+@font-face {
+  font-family: "Teko";
+  src: url("/fonts/cyberpunk/teko-variable.woff") format("woff");
+  font-weight: 300 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rajdhani";
+  src: url("/fonts/cyberpunk/rajdhani-medium.woff") format("woff");
+  font-weight: 400 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rajdhani";
+  src: url("/fonts/cyberpunk/rajdhani-bold.woff") format("woff");
+  font-weight: 600 900;
+  font-display: swap;
+}
+
+html[data-site-theme="cyberpunk"] {
+  color-scheme: dark;
+  --site-primary: #fcee0a;
+  --site-primary-rgb: 252 238 10;
+  --site-primary-strong: #fff877;
+  --site-secondary: #fcee0a;
+  --site-secondary-rgb: 252 238 10;
+  --site-on-secondary: #080808;
+  --site-accent: #fcee0a;
+  --site-tertiary: #63f4f2;
+  --site-link: #63f4f2;
+  --site-text: #eeefef;
+  --site-muted: #b4bbbb;
+  --site-border: #414847;
+  --site-bg: #080808;
+  --site-bg-soft: #101414;
+  --cp-panel: #141919;
+  --cp-red: #ff315b;
+  --cp-heading: "Teko", Impact, "Arial Narrow", sans-serif;
+  --cp-body: "Rajdhani", "Arial Narrow", sans-serif;
+  --cp-cut: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  --cp-divider: url("/media/cyberpunk/section-divider.svg");
+  --cp-single-button: polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 calc(50% + 2px),6px calc(50% + 2px),6px calc(50% - 2px),0 calc(50% - 2px));
+  --hb-color-background: var(--site-bg);
+  --hb-color-foreground: var(--site-text);
+  --hb-color-header-bg: var(--site-primary);
+  --hb-color-header-fg: var(--site-bg);
+  --hb-color-footer-bg: var(--site-bg);
+  --hb-color-footer-fg: var(--site-muted);
+  --color-primary-50: #fffde7;
+  --color-primary-100: #fffac2;
+  --color-primary-200: #fff58a;
+  --color-primary-300: #fdf252;
+  --color-primary-400: #fcee0a;
+  --color-primary-500: #daca00;
+  --color-primary-600: #9c8b00;
+  --color-primary-700: #766200;
+  --color-primary-800: #514100;
+  --color-primary-900: #302a05;
+  --color-primary-950: #1d1a07;
+}
+
+html[data-site-theme="cyberpunk"] body {
+  font-family: var(--cp-body);
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+html[data-site-theme="cyberpunk"] ::selection {
+  background: var(--site-tertiary);
+  color: #080808;
+}
+html[data-site-theme="cyberpunk"] :focus-visible {
+  outline: 3px solid var(--site-tertiary);
+  outline-offset: 4px;
+}
+html[data-site-theme="cyberpunk"] .school-biography {
+  display: none;
+}
+html[data-site-theme="cyberpunk"] .cyberpunk-biography {
+  display: block;
+}
+html[data-site-theme="cyberpunk"] :is(h1,h2,h3,.text-3xl) {
+  font-family: var(--cp-heading);
+  font-weight: 600;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+}
+html[data-site-theme="cyberpunk"] .page-body :is(h1,h2) {
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
+}
+html[data-site-theme="cyberpunk"] .page-body h3 {
+  font-size: 2rem;
+}
+html[data-site-theme="cyberpunk"] .prose {
+  --tw-prose-body: var(--site-text);
+  --tw-prose-headings: var(--site-primary);
+  --tw-prose-links: var(--site-link);
+  --tw-prose-bold: #fff;
+  --tw-prose-counters: var(--site-muted);
+  --tw-prose-bullets: var(--site-tertiary);
+  --tw-prose-quotes: var(--site-text);
+  --tw-prose-quote-borders: var(--site-primary);
+  --tw-prose-code: var(--site-tertiary);
+  --tw-prose-hr: var(--site-border);
+  --tw-prose-th-borders: var(--site-border);
+  --tw-prose-td-borders: var(--site-border);
+  color: var(--site-text);
+}
+
+/* Floating controls over the page, with clipped chip outlines and side notches. */
+html[data-site-theme="cyberpunk"] .page-header {
+  position: fixed;
+  inset: 1.5rem 1.5rem auto;
+  max-width: 1392px;
+  margin-inline: auto;
+  background: transparent;
+  pointer-events: none;
+}
+html[data-site-theme="cyberpunk"] .page-body {
+  padding-top: 7rem;
+}
+html[data-site-theme="cyberpunk"] body:has(#section-resume-biography-3) .page-body {
+  padding-top: 0;
+}
+html[data-site-theme="cyberpunk"] #site-header.header {
+  position: relative;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+html[data-site-theme="cyberpunk"] #site-header .navbar {
+  --cp-tab-start: polygon(0 0,100% 0,100% 25%,calc(100% - 4px) 33%,calc(100% - 4px) 67%,100% 75%,100% 100%,12px 100%,0 calc(100% - 12px));
+  --cp-tab-middle: polygon(4px 0,100% 0,100% 25%,calc(100% - 4px) 33%,calc(100% - 4px) 67%,100% 75%,100% 100%,4px 100%,4px 75%,0 67%,0 33%,4px 25%);
+  --cp-tab-bridge: polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 25%,100% 33%,100% 67%,calc(100% - 4px) 75%,calc(100% - 4px) 100%,4px 100%,4px 75%,0 67%,0 33%,4px 25%);
+  --cp-tab-end: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%,0 75%,4px 67%,4px 33%,0 25%);
+  --cp-tab-pair-end: polygon(4px 0,calc(100% - 12px) 0,100% 12px,100% 100%,4px 100%,4px 75%,0 67%,0 33%,4px 25%);
+  max-width: none;
+  padding: 0;
+  gap: 0;
+  align-items: center;
+}
+html[data-site-theme="cyberpunk"] #site-header .navbar > .order-0 {
+  margin-right: 1rem;
+}
+html[data-site-theme="cyberpunk"] #site-header .navbar-brand {
+  --cp-chip-fill: rgb(8 13 15 / 0.72);
+  position: relative;
+  isolation: isolate;
+  min-height: 2.75rem;
+  background: rgb(83 97 91 / 0.55);
+  border: 0;
+  border-radius: 0;
+  color: #eeefef;
+  clip-path: var(--cp-single-button);
+  backdrop-filter: blur(12px);
+  pointer-events: auto;
+}
+html[data-site-theme="cyberpunk"] #site-header .navbar-brand::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--cp-chip-fill);
+  clip-path: var(--cp-single-button);
+  z-index: -1;
+  pointer-events: none;
+}
+html[data-site-theme="cyberpunk"] #site-header .navbar-brand:is(:hover,:focus-visible) {
+  --cp-chip-fill: #63f4f2;
+  color: #080808;
+  background: #63f4f2;
+}
+html[data-site-theme="cyberpunk"] #site-header .navbar-brand:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px #63f4f2;
+}
+html[data-site-theme="cyberpunk"] #site-header .navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1.1rem;
+  font-family: var(--cp-heading);
+  font-size: 2rem;
+  line-height: 1;
+  color: #eeefef;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.045em;
+  text-shadow: 1px 1px 0 #126669;
+}
+html[data-site-theme="cyberpunk"] #site-header #nav-menu {
+  margin: 0 0 0 auto;
+  padding: 0;
+  width: 34rem;
+  gap: 0;
+}
+html[data-site-theme="cyberpunk"] #nav-menu > .nav-item {
+  --cp-nav-shape: var(--cp-tab-middle);
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+html[data-site-theme="cyberpunk"] #nav-menu > .nav-item:first-child {
+  --cp-nav-shape: var(--cp-tab-start);
+}
+/* Cyber Kit's grouped controls: complementary seams, only the outer corners cut. */
+html[data-site-theme="cyberpunk"] #site-header :where(#nav-menu .nav-link,[data-search-toggle],#site-theme-control,label[for="nav-toggle"]) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.65rem 1rem;
+  background: rgb(0 0 0 / 0.92);
+  border: 0;
+  border-radius: 0;
+  color: #fff;
+  clip-path: var(--cp-nav-shape);
+  font-family: var(--cp-body);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+  pointer-events: auto;
+}
+html[data-site-theme="cyberpunk"] #site-header label[for="nav-toggle"] {
+  display: none;
+}
+html[data-site-theme="cyberpunk"] #site-header :where(#nav-menu .nav-link,[data-search-toggle],#site-theme-control,label[for="nav-toggle"]):is(.active,:hover,:focus-visible,:focus-within) {
+  background: #00cce6;
+  color: #080808;
+}
+html[data-site-theme="cyberpunk"] #site-header :is(#nav-menu .nav-link,[data-search-toggle],label[for="nav-toggle"]):focus-visible,
+html[data-site-theme="cyberpunk"] #site-header #site-theme-control:focus-within {
+  outline: none;
+  box-shadow: inset 0 0 0 3px #fcee0a;
+}
+html[data-site-theme="cyberpunk"] #site-header .nav-link.active::after {
+  display: none;
+}
+html[data-site-theme="cyberpunk"] #site-header :is([data-search-toggle],label[for="nav-toggle"]) {
+  width: 3rem;
+  flex: none;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  color: #fcee0a;
+}
+html[data-site-theme="cyberpunk"] #site-header [data-search-toggle] {
+  --cp-nav-shape: var(--cp-tab-bridge);
+}
+html[data-site-theme="cyberpunk"] #site-header .navbar > .order-1 {
+  gap: 0;
+  flex: none;
+}
+html[data-site-theme="cyberpunk"] #site-header .px-3:has(> #site-theme-control) {
+  padding: 0;
+  pointer-events: auto;
+}
+html[data-site-theme="cyberpunk"] #site-header #site-theme-control {
+  --cp-nav-shape: var(--cp-tab-end);
+  padding-inline: 1rem;
+  color: #fcee0a;
+  color-scheme: dark;
+}
+html[data-site-theme="cyberpunk"] #site-header :is([data-search-toggle],#site-theme-control,label[for="nav-toggle"]):is(:hover,:focus-visible,:focus-within) {
+  color: #080808;
+}
+html[data-site-theme="cyberpunk"] #site-theme-picker option {
+  background: #080808;
+  color: #fcee0a;
+}
+
+/* Original profile arrangement: portrait/details left, biography and CV right. */
+html[data-site-theme="cyberpunk"] #section-resume-biography-3 {
+  padding: 0 !important;
+}
+html[data-site-theme="cyberpunk"] .cp-profile-layout {
+  position: relative;
+  max-width: 1280px;
+  margin: auto;
+  padding: 10rem 2rem 6rem;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,2fr);
+  align-items: start;
+  gap: 2rem;
+}
+html[data-site-theme="cyberpunk"] .cp-profile-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+html[data-site-theme="cyberpunk"] .page-body .cp-name {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto 0.6rem;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: #fcee0a;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  transform: skew(-6deg);
+}
+html[data-site-theme="cyberpunk"] .cp-name::before,
+html[data-site-theme="cyberpunk"] .cp-name::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+html[data-site-theme="cyberpunk"] .cp-name::before {
+  color: #d7224d;
+  clip-path: inset(54% 0 41% 0);
+  transform: translateX(5px);
+}
+html[data-site-theme="cyberpunk"] .cp-name::after {
+  color: #63f4f2;
+  clip-path: inset(28% 0 68% 0);
+  transform: translateX(-4px);
+}
+html[data-site-theme="cyberpunk"] .cp-role {
+  margin: 0;
+  color: #63f4f2;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  font-weight: 700;
+}
+html[data-site-theme="cyberpunk"] .cp-affiliation {
+  margin: 0.35rem 0 0;
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+html[data-site-theme="cyberpunk"] #section-resume-biography-3 .cp-affiliation a {
+  color: #d4dddd;
+  text-decoration: none;
+}
+html[data-site-theme="cyberpunk"] #section-resume-biography-3 .cp-affiliation a:hover {
+  color: #63f4f2;
+}
+html[data-site-theme="cyberpunk"] .page-body a.cp-button {
+  --cp-single-button: polygon(0 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 calc(50% + 2px),12px calc(50% + 2px),12px calc(50% - 2px),0 calc(50% - 2px));
+  --cp-button-fill: #fcee0a;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0.85rem 1.3rem;
+  min-height: 3.25rem;
+  border: 0;
+  border-radius: 0;
+  background: #080808;
+  color: #080808;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  clip-path: var(--cp-single-button);
+}
+/* An inset silhouette follows the notch and diagonal, including their outline. */
+html[data-site-theme="cyberpunk"] .page-body a.cp-button::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--cp-button-fill);
+  clip-path: var(--cp-single-button);
+  z-index: -1;
+  pointer-events: none;
+}
+html[data-site-theme="cyberpunk"] .page-body a.cp-button:is(:hover,:focus-visible) {
+  --cp-button-fill: #63f4f2;
+  color: #080808;
+}
+html[data-site-theme="cyberpunk"] .cp-button:focus-visible {
+  outline: none;
+}
+html[data-site-theme="cyberpunk"] .cp-button:focus-visible::before {
+  box-shadow: inset 0 0 0 3px #080808;
+}
+html[data-site-theme="cyberpunk"] .cp-socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+html[data-site-theme="cyberpunk"] .page-body .cp-socials a {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  min-height: 2.75rem;
+  border: 1px solid #365657;
+  background: #101919;
+  color: #63f4f2;
+}
+html[data-site-theme="cyberpunk"] .page-body .cp-socials a:hover {
+  color: #fcee0a;
+  border-color: #fcee0a;
+}
+html[data-site-theme="cyberpunk"] .cp-social-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+html[data-site-theme="cyberpunk"] .cp-portrait {
+  position: relative;
+  margin: 0;
+  min-width: 0;
+  width: 200px;
+  max-width: 100%;
+}
+html[data-site-theme="cyberpunk"] .cp-portrait-frame {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 2px solid #63f4f2;
+  background: #111;
+  clip-path: var(--cp-cut);
+}
+html[data-site-theme="cyberpunk"] .cp-portrait img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+html[data-site-theme="cyberpunk"] .cp-profile-bio h2 {
+  margin: 0 0 1.75rem;
+  color: #fcee0a;
+  font-size: 3rem;
+}
+html[data-site-theme="cyberpunk"] .cp-about-text {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+html[data-site-theme="cyberpunk"] .cp-about-text p:first-child {
+  margin-top: 0;
+}
+html[data-site-theme="cyberpunk"] .cp-about-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* The vector edge includes flat runs, triangular fractures, and detached ticks.
+   Use the previous section's color for either direction of the transition. */
+html[data-site-theme="cyberpunk"] :is(#section-resume-biography-3,#homepage-education,#homepage-news,#featured-publications) {
+  isolation: isolate;
+}
+html[data-site-theme="cyberpunk"] :is(#section-resume-biography-3,#homepage-news) {
+  --cp-previous-bg: #fcee0a;
+  background: #080808;
+}
+html[data-site-theme="cyberpunk"] :is(#homepage-education,#featured-publications) {
+  --cp-previous-bg: #080808;
+  background: #fcee0a;
+  color: #080808;
+  padding-block: 5.5rem !important;
+}
+html[data-site-theme="cyberpunk"] :is(#section-resume-biography-3,#homepage-education,#homepage-news,#featured-publications)::before,
+html[data-site-theme="cyberpunk"] body:has(#featured-publications) .page-footer::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  transform: none;
+  width: 100%;
+  height: 40px;
+  background: var(--cp-previous-bg);
+  opacity: 1;
+  /* Keep the small cutouts at a readable scale on narrow screens. */
+  mask-image: var(--cp-divider);
+  mask-size: max(100%, 1100px) 40px;
+  mask-position: left top;
+  mask-repeat: no-repeat;
+  z-index: 1;
+  pointer-events: none;
+}
+html[data-site-theme="cyberpunk"] :is(#homepage-education,#featured-publications)::before {
+  transform: scaleX(-1);
+}
+html[data-site-theme="cyberpunk"] :is(#section-resume-biography-3,#homepage-education,#homepage-news,#featured-publications) > .home-section-bg {
+  background: transparent;
+}
+/* Cyan halftone dots fade toward the reading column, keeping body text clear. */
+html[data-site-theme="cyberpunk"] :is(#section-resume-biography-3,#homepage-news) > .home-section-bg {
+  background-image: radial-gradient(circle, rgb(99 244 242 / 0.3) 1px, transparent 1.4px);
+  background-size: 14px 14px;
+  mask-image: linear-gradient(90deg,#000, rgb(0 0 0 / 0.15) 32%, rgb(0 0 0 / 0.07) 72%, #000);
+  pointer-events: none;
+}
+html[data-site-theme="cyberpunk"] :is(#homepage-education,#featured-publications) :is(h2,.text-3xl) {
+  font-family: var(--cp-heading);
+  font-size: clamp(3rem,5vw,4.5rem);
+  color: #080808;
+  text-align: left;
+}
+html[data-site-theme="cyberpunk"] #homepage-education > .max-w-4xl {
+  max-width: 1024px;
+}
+html[data-site-theme="cyberpunk"] #homepage-education .grid {
+  grid-template-columns: minmax(0,1fr);
+  gap: 1.3rem;
+}
+html[data-site-theme="cyberpunk"] #homepage-education .site-education-card {
+  background: #101515;
+  color: #eeefef;
+  border: none;
+  border-radius: 0;
+  padding: 1.6rem;
+  clip-path: var(--cp-cut);
+  box-shadow: inset 0 -4px 0 #080808;
+}
+html[data-site-theme="cyberpunk"] #homepage-education .site-education-card .text-xl {
+  color: #fcee0a;
+  font-family: var(--cp-heading);
+  font-size: 1.65rem;
+  line-height: 1.1;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0 0 0.45rem;
+}
+html[data-site-theme="cyberpunk"] :is(.site-education-card,.site-experience-card) .rounded-full {
+  border-radius: 0;
+}
+/* Static corner brackets replace the school themes' filled logo badges. */
+html[data-site-theme="cyberpunk"] .site-resume-icon {
+  position: relative;
+  isolation: isolate;
+  color: #fcee0a;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+html[data-site-theme="cyberpunk"] .site-resume-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(currentColor,currentColor) left top / 10px 1.5px,
+    linear-gradient(currentColor,currentColor) left top / 1.5px 10px,
+    linear-gradient(currentColor,currentColor) right top / 10px 1.5px,
+    linear-gradient(currentColor,currentColor) right top / 1.5px 10px,
+    linear-gradient(currentColor,currentColor) left bottom / 10px 1.5px,
+    linear-gradient(currentColor,currentColor) left bottom / 1.5px 10px,
+    linear-gradient(currentColor,currentColor) right bottom / 10px 1.5px,
+    linear-gradient(currentColor,currentColor) right bottom / 1.5px 10px;
+  background-repeat: no-repeat;
+}
+html[data-site-theme="cyberpunk"] .site-resume-icon > :is(img,svg) {
+  width: 30px;
+  height: 30px;
+  color: inherit;
+}
+html[data-site-theme="cyberpunk"] .site-resume-icon > img {
+  filter: url("#cp-logo-silhouette");
+}
+html[data-site-theme="cyberpunk"] .site-resume-icon[data-logo-treatment="ink"] > img {
+  filter: url("#cp-logo-ink");
+}
+html[data-site-theme="cyberpunk"] :is(time,.homepage-news-date,.experience-card-date) {
+  color: #63f4f2;
+  font-family: var(--cp-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+html[data-site-theme="cyberpunk"] .page-body :is(.site-education-card,.site-experience-card,[role="article"]) {
+  border: 1px solid #495959;
+  border-top: 3px solid #63f4f2;
+  background: #141919;
+  border-radius: 0;
+  box-shadow: none;
+}
+html[data-site-theme="cyberpunk"] .page-body :is(.site-education-card,.site-experience-card,[role="article"]):hover {
+  border-color: #63f4f2;
+  transform: none;
+}
+html[data-site-theme="cyberpunk"] .site-experience-card .text-gray-900 {
+  color: #fcee0a;
+}
+html[data-site-theme="cyberpunk"] .experience-card-title {
+  overflow-wrap: anywhere;
+}
+html[data-site-theme="cyberpunk"] #homepage-news {
+  padding-block: 5rem !important;
+}
+html[data-site-theme="cyberpunk"] #homepage-news > .max-w-4xl {
+  max-width: 1024px;
+}
+html[data-site-theme="cyberpunk"] #homepage-news .text-3xl {
+  color: #63f4f2;
+  font-size: clamp(3rem,5vw,4.5rem);
+  text-align: left;
+}
+html[data-site-theme="cyberpunk"] .homepage-news-list {
+  gap: 0;
+}
+html[data-site-theme="cyberpunk"] .homepage-news-item {
+  padding: 1.25rem 0;
+  gap: 1.75rem;
+  grid-template-columns: 8rem minmax(0,1fr);
+  border-bottom: 1px solid #3c4f4f;
+  font-size: 1.25rem;
+}
+html[data-site-theme="cyberpunk"] .homepage-news-item:first-child {
+  border-top: 1px solid #63f4f2;
+}
+html[data-site-theme="cyberpunk"] .homepage-news-date {
+  padding-top: 0.2rem;
+}
+
+/* Preserve the stacked publication rows, with an angular frame and cyan trim. */
+html[data-site-theme="cyberpunk"] #featured-publications > .flex {
+  max-width: 1024px;
+  margin-inline: auto;
+  padding-inline: 2rem;
+  align-items: flex-start;
+}
+html[data-site-theme="cyberpunk"] .featured-publications-container {
+  max-width: 1024px;
+  width: 100%;
+  padding-inline: 0;
+}
+html[data-site-theme="cyberpunk"] .featured-publications-grid {
+  grid-template-columns: minmax(0,1fr);
+  gap: 1.5rem;
+}
+html[data-site-theme="cyberpunk"] .featured-publication {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: #101515;
+  color: #eeefef;
+  clip-path: var(--cp-cut);
+  transition: box-shadow 160ms ease;
+}
+html[data-site-theme="cyberpunk"] .featured-publication:hover {
+  box-shadow: inset 0 -4px 0 #00b8bd;
+}
+html[data-site-theme="cyberpunk"] .featured-publication-layout {
+  display: grid;
+  grid-template-columns: 18rem minmax(0,1fr);
+  gap: 0;
+  height: 100%;
+  align-items: stretch;
+}
+html[data-site-theme="cyberpunk"] .featured-publication-image {
+  width: 100%;
+  min-height: 15rem;
+  background: #fff;
+  border-radius: 0;
+  border-right: 3px solid #63f4f2;
+}
+html[data-site-theme="cyberpunk"] .featured-publication-image img {
+  object-fit: contain;
+}
+html[data-site-theme="cyberpunk"] .featured-publication-copy {
+  padding: 1.7rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+html[data-site-theme="cyberpunk"] .cp-publication-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #63f4f2;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+html[data-site-theme="cyberpunk"] .featured-publication h3 {
+  font-size: 2rem;
+  line-height: 1.1;
+}
+html[data-site-theme="cyberpunk"] #featured-publications .featured-publication h3 a {
+  color: #fcee0a;
+  text-decoration: none;
+}
+html[data-site-theme="cyberpunk"] #featured-publications .featured-publication h3 a:hover {
+  color: #63f4f2;
+}
+html[data-site-theme="cyberpunk"] .featured-publication .publication-authors {
+  color: #bbc8c8;
+  font-size: 1rem;
+}
+html[data-site-theme="cyberpunk"] .publication-author-self {
+  color: #fff;
+}
+html[data-site-theme="cyberpunk"] .featured-publication-copy > p {
+  font-size: 1.1rem;
+  line-height: 1.45;
+  color: #cbd2d2;
+  margin-bottom: 0;
+}
+html[data-site-theme="cyberpunk"] .resume-block-divider::before {
+  height: 1px;
+  background: #63f4f2;
+  opacity: 0.6;
+}
+html[data-site-theme="cyberpunk"] .page-footer {
+  position: relative;
+  margin-top: 0;
+  background: #080808;
+  border-top: 1px solid #63f4f2;
+}
+html[data-site-theme="cyberpunk"] body:has(#featured-publications) .page-footer {
+  --cp-previous-bg: #fcee0a;
+  border-top: 0;
+  padding-top: 2.5rem;
+}
+html[data-site-theme="cyberpunk"] .page-footer :is(footer,a) {
+  color: #b4bbbb;
+}
+html[data-site-theme="cyberpunk"] .page-footer a:hover {
+  color: #63f4f2;
+}
+html[data-site-theme="cyberpunk"] [x-data="searchModal()"] .rounded-2xl {
+  background: #141919;
+  border: 1px solid #63f4f2;
+  border-radius: 0;
+}
+html[data-site-theme="cyberpunk"] .page-header [x-data="searchModal()"] {
+  pointer-events: auto;
+}
+
+@media (max-width: 1023px) {
+  html[data-site-theme="cyberpunk"] .page-header {
+    inset: 1.25rem 1rem auto;
+  }
+  html[data-site-theme="cyberpunk"] #site-header [data-search-toggle] {
+    --cp-nav-shape: var(--cp-tab-start);
+  }
+  html[data-site-theme="cyberpunk"] #site-header #site-theme-control {
+    --cp-nav-shape: var(--cp-tab-bridge);
+  }
+  html[data-site-theme="cyberpunk"] #site-header label[for="nav-toggle"] {
+    --cp-nav-shape: var(--cp-tab-end);
+    display: flex;
+  }
+  html[data-site-theme="cyberpunk"] #site-header #nav-menu {
+    flex: 0 0 100%;
+    order: 4;
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.75rem;
+    background: rgb(8 13 15 / 0.97);
+    border: 1px solid #53615b;
+    clip-path: var(--cp-cut);
+    backdrop-filter: blur(12px);
+    pointer-events: auto;
+  }
+  html[data-site-theme="cyberpunk"] #site-header #nav-toggle:checked ~ #nav-menu {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 0.5rem 0;
+  }
+  html[data-site-theme="cyberpunk"] #nav-menu > .nav-item:nth-child(odd) {
+    --cp-nav-shape: var(--cp-tab-start);
+  }
+  html[data-site-theme="cyberpunk"] #nav-menu > .nav-item:nth-child(even) {
+    --cp-nav-shape: var(--cp-tab-pair-end);
+  }
+  html[data-site-theme="cyberpunk"] #site-header .nav-link {
+    width: 100%;
+  }
+  html[data-site-theme="cyberpunk"] .cp-profile-layout {
+    padding-block: 9rem 4.5rem;
+  }
+}
+@media (max-width: 767px) {
+  html[data-site-theme="cyberpunk"] .cp-profile-layout {
+    grid-template-columns: minmax(0,1fr);
+    padding: 8.5rem 1.5rem 4rem;
+    gap: 3rem;
+  }
+  html[data-site-theme="cyberpunk"] .cp-about-text {
+    font-size: 1.2rem;
+  }
+  html[data-site-theme="cyberpunk"] :is(#homepage-education,#homepage-news,#featured-publications) {
+    padding-block: 3.5rem !important;
+  }
+  html[data-site-theme="cyberpunk"] #featured-publications > .flex {
+    padding-inline: 1.5rem;
+  }
+  html[data-site-theme="cyberpunk"] .featured-publication-layout {
+    display: flex;
+    flex-direction: column;
+  }
+  html[data-site-theme="cyberpunk"] .featured-publication-image {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16/9;
+    border-right: 0;
+    border-bottom: 3px solid #63f4f2;
+  }
+  html[data-site-theme="cyberpunk"] .featured-publication-copy {
+    padding: 1.3rem;
+  }
+  html[data-site-theme="cyberpunk"] .homepage-news-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+@media (max-width: 420px) {
+  html[data-site-theme="cyberpunk"] .page-header {
+    inset: 1rem 0.5rem auto;
+  }
+  html[data-site-theme="cyberpunk"] #site-header .navbar > .order-0 {
+    margin-right: 0.5rem;
+  }
+  html[data-site-theme="cyberpunk"] #site-header .navbar-brand {
+    padding-inline: 0.6rem;
+    font-size: 1.25rem;
+  }
+  html[data-site-theme="cyberpunk"] #site-header :is([data-search-toggle],label[for="nav-toggle"]) {
+    width: 2.75rem;
+  }
+  html[data-site-theme="cyberpunk"] #site-header #site-theme-control {
+    padding-inline: 0.5rem;
+    font-size: 0.75rem;
+  }
+  html[data-site-theme="cyberpunk"] #homepage-education .site-education-card > .flex {
+    flex-direction: column;
+  }
+  html[data-site-theme="cyberpunk"] .site-experience-card > .flex {
+    flex-direction: column;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-site-theme="cyberpunk"] *, html[data-site-theme="cyberpunk"] *::before, html[data-site-theme="cyberpunk"] *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

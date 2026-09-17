@@ -1,14 +1,17 @@
 {{- $theme := site.Params.hugoblox.theme.school | default "uiuc" | lower -}}
-{{- if not (in (slice "uiuc" "neu") $theme) -}}
+{{- if not (in (slice "uiuc" "neu" "cyberpunk") $theme) -}}
   {{- $theme = "uiuc" -}}
 {{- end -}}
+{{- $cyberpunkStyles := resources.Get "css/cyberpunk.css" | minify | fingerprint "sha256" -}}
+<link rel="stylesheet" href="{{ $cyberpunkStyles.RelPermalink }}" integrity="{{ $cyberpunkStyles.Data.Integrity }}" crossorigin="anonymous">
 <script>
   (function() {
     const defaultTheme = "{{ $theme }}";
-    const allowedThemes = ["uiuc", "neu"];
+    const allowedThemes = ["uiuc", "neu", "cyberpunk"];
     const themeLabels = {
-      uiuc: "UIUC",
-      neu: "NEU"
+      uiuc: "Illinois",
+      neu: "Northeastern",
+      cyberpunk: "Cyberpunk"
     };
 
     function normalizeTheme(theme) {
@@ -19,17 +22,31 @@
       const normalizedTheme = normalizeTheme(theme);
       document.documentElement.dataset.siteTheme = normalizedTheme;
       document.documentElement.setAttribute("data-theme-pack", normalizedTheme);
-      localStorage.setItem("hb-theme-pack", normalizedTheme);
+      // School presets are light; Cyberpunk uses the existing dark components.
+      document.documentElement.classList.toggle("dark", normalizedTheme === "cyberpunk");
+      try {
+        localStorage.setItem("hb-theme-pack", normalizedTheme);
+      } catch (error) {
+        // Switching still works when browser storage is unavailable.
+      }
       return normalizedTheme;
     }
 
-    const savedTheme = normalizeTheme(localStorage.getItem("hb-theme-pack"));
+    let savedTheme = defaultTheme;
+    try {
+      savedTheme = normalizeTheme(localStorage.getItem("hb-theme-pack"));
+    } catch (error) {
+      // Use the configured default when storage is blocked.
+    }
     applyTheme(savedTheme);
 
     document.addEventListener("DOMContentLoaded", function() {
       const picker = document.querySelector('select[onchange*="data-theme-pack"]');
       if (!picker) return;
 
+      // Replace the upstream inline handler so there is one theme controller.
+      picker.removeAttribute("onchange");
+      picker.id = "site-theme-picker";
       picker.innerHTML = "";
       allowedThemes.forEach(function(theme) {
         const option = document.createElement("option");
@@ -39,9 +56,26 @@
       });
 
       picker.value = document.documentElement.dataset.siteTheme;
-      picker.setAttribute("aria-label", "School theme");
+      picker.setAttribute("aria-label", "Site theme");
+
+      // Keep the purpose visible; show the selected name in the native menu.
+      // The native select remains the interactive, keyboard-accessible control.
+      const control = document.createElement("label");
+      control.id = "site-theme-control";
+      control.htmlFor = picker.id;
+      control.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1.4-3.4 1 1 0 0 1 .7-1.7H17a4 4 0 0 0 4-4A9 9 0 0 0 12 3Z"/><circle cx="7.5" cy="10" r=".8" fill="currentColor"/><circle cx="11" cy="7" r=".8" fill="currentColor"/><circle cx="15.5" cy="8" r=".8" fill="currentColor"/></svg><span aria-hidden="true">Theme</span><svg class="theme-chevron" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m4 6 4 4 4-4"/></svg>';
+      picker.before(control);
+      control.appendChild(picker);
+
+      function updateLabel() {
+        const title = "Change theme (current: " + themeLabels[picker.value] + ")";
+        control.title = title;
+        picker.title = title;
+      }
+      updateLabel();
       picker.addEventListener("change", function(event) {
         applyTheme(event.target.value);
+        updateLabel();
       });
     });
   })();
