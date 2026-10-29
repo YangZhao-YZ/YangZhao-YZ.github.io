@@ -408,15 +408,15 @@ body {
   }
 }
 
-.resume-biography a[href="/uploads/resume.pdf"] {
+.resume-biography a[href="https://github.com/YangZhao-YZ/YangZhao_CV/blob/main/YangZhao_CV.pdf"] {
   background: var(--site-secondary);
   color: var(--site-on-secondary);
   border: 2px solid var(--site-secondary);
   box-shadow: 0 12px 28px rgb(var(--site-secondary-rgb) / 0.24);
 }
 
-.resume-biography a[href="/uploads/resume.pdf"]:hover,
-.resume-biography a[href="/uploads/resume.pdf"]:focus {
+.resume-biography a[href="https://github.com/YangZhao-YZ/YangZhao_CV/blob/main/YangZhao_CV.pdf"]:hover,
+.resume-biography a[href="https://github.com/YangZhao-YZ/YangZhao_CV/blob/main/YangZhao_CV.pdf"]:focus {
   background: var(--site-primary);
   color: #ffffff;
   border-color: var(--site-primary);
